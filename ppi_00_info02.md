@@ -11,6 +11,7 @@ Actualmente existen varios aplicativos similares a la aplicación que vamos a de
  ---
 Un software de código abierto que pueden ser de utilidad para el desarrollo de la aplicación es:
 - TRACKASS (Amazon Price Tracker): realiza un seguimiento de los productos de Amazon que el usuario desea comprar a un precio en particular, cuando el precio cae a un precio específico, notifica al usuario a través del correo electrónico registrado. ayuda a los usuarios a ahorrar tiempo
+- Price-tracker: Es una aplicación python3 simple que rastrea los precios y advierte al usuario por correo electrónico.
 
  ## Librerías disponibles
  ---
