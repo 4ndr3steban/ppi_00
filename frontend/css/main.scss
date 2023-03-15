@@ -71,16 +71,13 @@ section {
         margin-top: .8em;
     }
 
-    .ingresar-cta {
-        background: var(--primary-color);
-        color: white;
+    .ingresar-cta { 
+        display: block;
         text-decoration: none;
-        padding: .6em 1.3em;
         font-size: 1.2em;
-        border-radius: 5em;
-        font-weight: bold;
-        display: inline-block;
+        font-weight: 700px;
         margin-top: 1em;
+        padding: .8em 1.3em;
     }
 
     .buscar-cta {
@@ -88,16 +85,17 @@ section {
         color: white;
         text-decoration: none;
         padding: .6em 1.3em;
-        font-size: 1.2em;
+        font-size: 1.4em;
         border-radius: 5em;
-        font-weight: bold;
+        font-weight: 700px;
         display: inline-block;
+        margin-top: 1em;
     }
 
 }
 
 .hero-img {
-    width: 70%;
+    width: 60%;
     margin-top: 3em;
 }
 
@@ -110,14 +108,14 @@ section {
     margin: 0;
     padding-left: .1em;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
 
     li {
         font-size: 1.2em;
         font-weight: bold;
         margin-bottom: 1em;
         margin-left: 2em;
-        position: relative;
+        position: sticky;
 
         &:before {
             content: '';
@@ -223,6 +221,7 @@ nav {
     .navBar .container {
         display: grid;
         grid-template-columns: 180px auto;
+        justify-content: unset;
     }
 
     .navBar nav {
