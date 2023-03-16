@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Crash Course</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class = "navBar">
+        <div class="container">
+            <a class="logo" href="#">Price<span>Scanner</span></a>
+
+            <img id="mobile-cta" class="mobile-menu" src="images/menu.svg" alt="Open Navegation">
+
+            <nav>
+
+                <img id="mobile-exit" class="mobile-menu-exit" src="images/exit.svg" alt="Close Navegation">
+
+                <ul class="primary-navegation">
+                    <li class="current"><a href="#">Qué Es?</a></li>
+                    <li><a href="#">Características</a></li>
+                </ul>
+
+                <ul class="secondary-navegation">
+                    <li class="sign-up-cta"><a href="#">Sign Up</a></li>
+                    <li class="log-in-cta"><a href="#">Log In</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="container">
+            <div class="left-col">
+                <p class="subhead">Busca todo lo que necesitas</p>
+                <h1>Compara los Precios y Encuentra los Mejores Productos</h1>
+
+                <div class="hero-cta">
+                    <a href="" class="ingresar-cta">Ingresar</a>
+                    <a href="" class="buscar-cta">Buscar</a>
+                </div>
+            </div>
+            
+            <img src="images/compare.svg" class="hero-img" alt="Ilustration">
+        </div>
+    </section>
+
+<!--this is the features section-->
+    <section class="ingresar-campos">
+        <div class="container">
+            <h3>Solo debes ingresar los siguientes campos:</h3>
+            <ul class="campos-list">
+                <li>Producto</li>
+                <li>Precio Deseado</li>
+                <li>Ubicación</li>
+                <li>Precio Deseado del Envio</li>
+            </ul>
+
+            <img src="images/comp-precios.jpg" alt="comparacion de precios">
+        </div>
+    </section>
+
+<!--this is the contact section-->
+    <section class="contact-question-section">
+        <div class="container">
+            <div class="contact-left">
+                <h2>Contacto o Preguntas</h2>
+                <form action="">
+                    <label for="name">Nombre</label>
+                    <input type="text" id="name" name="name">
+
+                    <label for="email">Correo</label>
+                    <input type="text" id="email" name="email">
+
+                    <label for="message">Mensaje</label>
+                    <textarea name="message" placeholder="Ingrese el mensaje" id="message" cols="30" rows="10"></textarea>
+
+                    <input type="submit" class="send-message-cta" value="Enviar Mensaje">
+                </form>
+            </div>
+
+            <div class="contact-right">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15863.665677774663!2d-75.60136557417715!3d6.274719856566428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e44293be2b564b7%3A0x12cc8ddcb9f6d6e4!2sSchool%20of%20Mines%20-%20National%20University%20of%20Colombia!5e0!3m2!1sen!2sco!4v1678854855260!5m2!1sen!2sco" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+        </div>
+
+    </section>
+
+    <script>
+        const mobileBtn = document.getElementById('mobile-cta')
+            nav = document.querySelector('nav')
+            mobileBtnExit = document.getElementById('mobile-exit')
+        
+        mobileBtn.addEventListener('click', () => {
+            nav.classList.add('menu-btn');
+        })
+
+        mobileBtnExit.addEventListener('click', () => {
+            nav.classList.remove('menu-btn');
+        })
+    </script>
+</body>
+</html>
