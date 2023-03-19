@@ -3,6 +3,10 @@
   --primary-color: #007AF3;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: #F2F2F2;
   margin: 0;
@@ -12,6 +16,8 @@ body {
 .navBar {
   background: white;
   padding: 1em;
+  box-shadow: 0 1em 1em rgba(0, 0, 0, 0.05);
+  z-index: 2;
 }
 .navBar .logo {
   text-decoration: none;
@@ -28,6 +34,7 @@ body {
 .navBar .container {
   display: flex;
   place-content: space-between;
+  gap: 2rem;
 }
 .navBar .mobile-menu {
   cursor: pointer;
@@ -35,6 +42,7 @@ body {
 
 a {
   color: #444444;
+  transition: all 1000ms ease;
 }
 
 ul {
@@ -44,7 +52,7 @@ ul {
 }
 
 section {
-  padding: 5em 2em;
+  padding: 3em 2em;
 }
 
 .hero {
@@ -71,8 +79,8 @@ section {
   padding: 0.8em 1.3em;
 }
 .left-col .buscar-cta {
-  background: var(--primary-color);
-  color: white;
+  color: var(--primary-color);
+  border: 3px solid var(--primary-color);
   text-decoration: none;
   padding: 0.6em 1.3em;
   font-size: 1.4em;
@@ -80,6 +88,10 @@ section {
   font-weight: 700px;
   display: inline-block;
   margin-top: 1em;
+}
+.left-col .buscar-cta:hover {
+  background: var(--primary-color);
+  color: white;
 }
 
 .hero-img {
@@ -122,6 +134,32 @@ section {
 
 h2 {
   font-size: 2em;
+}
+
+section#tiendas-usadas h4 {
+  margin-top: 8rem;
+  text-align: center;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  color: gray;
+}
+
+.ingresar-campos img {
+  display: block;
+  right: 0;
+  width: 550px;
+  bottom: 3em;
+  margin-right: 2.5em;
+}
+
+section#tiendas-usadas .container .tiendas {
+  display: flex;
+  position: inline-block;
+  align-items: center;
+  margin-top: 5em;
+  margin-left: 5em;
 }
 
 label {
@@ -200,11 +238,11 @@ nav li a:hover {
   .navBar .container {
     display: grid;
     grid-template-columns: 180px auto;
-    justify-content: unset;
+    place-content: unset;
   }
   .navBar nav {
     display: flex;
-    justify-content: space-between;
+    place-content: space-between;
     background: none;
     position: unset;
     height: auto;
@@ -225,6 +263,10 @@ nav li a:hover {
   .navBar nav li.current a {
     font-weight: bold;
   }
+  .navBar nav li a:hover {
+    color: #4199f0;
+    border-bottom: 4px solid #4199f0;
+  }
   .navBar nav li.log-in-cta a {
     color: var(--primary-color);
     border: 3px solid var(--primary-color);
@@ -243,11 +285,11 @@ nav li a:hover {
     margin: 0 auto;
   }
   section {
-    padding: 10em 4em;
+    padding: 5em 4em;
   }
   .hero .container {
     display: flex;
-    justify-content: space-between;
+    place-content: space-between;
     text-align: left;
   }
   .hero .container .left-col {
@@ -255,7 +297,7 @@ nav li a:hover {
   }
   .hero .container .left-col h1 {
     font-size: 3em;
-    width: 90%;
+    width: 100%;
   }
   .hero-img {
     width: 30%;
@@ -286,10 +328,13 @@ nav li a:hover {
     position: absolute;
     right: 0;
     width: 550px;
-    bottom: -8em;
+    bottom: 3em;
+    margin-right: 2.5em;
   }
   .contact-question-section {
     position: relative;
+    padding: 3em 2em;
+    margin: 3em 8em 0em 1em;
   }
   .contact-question-section .container {
     display: flex;
@@ -323,5 +368,104 @@ nav li a:hover {
     background: url("../images/dots.svg") no-repeat;
     left: 7.2em;
     top: 2em;
+  }
+}
+.footer-container {
+  background-color: lightgray;
+  padding-top: 5em;
+}
+
+.footer {
+  width: 80%;
+  height: auto;
+  background-color: lightgray;
+  color: black;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.footer-heading {
+  display: flex;
+  flex-direction: column;
+  margin-right: 4em;
+}
+
+.footer-heading h2 {
+  margin-bottom: 2em;
+}
+
+.footer-heading a {
+  text-decoration: none;
+  color: black;
+  margin-bottom: 0.5em;
+}
+
+.footer-heading a:hover {
+  font-weight: 700;
+  transition: 0.3s ease-out;
+}
+
+.footer-email-form {
+  margin-bottom: 2em;
+}
+
+#footer-email {
+  width: 250px;
+  height: 40px;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  padding-left: 0.5em;
+  font-size: 1em;
+  margin-bottom: 1em;
+}
+
+#footer-email::-moz-placeholder {
+  color: #b1b1b1;
+}
+
+#footer-email::placeholder {
+  color: #b1b1b1;
+}
+
+#footer-email-btn {
+  width: 115px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: gray;
+  outline: none;
+  border: none;
+  color: black;
+  font-size: 1em;
+}
+
+#footer-email-btn:hover {
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  transition: all 0.4s ease-out;
+}
+
+@media screen and (min-width: 1450px) {
+  .footer {
+    height: 50vh;
+  }
+  .footer-email-form {
+    margin-top: 4em;
+  }
+}
+@media screen and (min-width: 820px) {
+  .footer {
+    padding-top: 2em;
+  }
+}
+@media screen and (min-width: 720px) {
+  .footer-3 {
+    display: none;
+  }
+  .footer-email-form {
+    margin-top: 2em;
   }
 }/*# sourceMappingURL=main.css.map */
