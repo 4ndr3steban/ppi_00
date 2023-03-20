@@ -11,7 +11,7 @@ def inicio():
 
 @app.route('/catalogo')
 def catalogo():
-    return render_template('2.html')
+    return render_template('catalogo.html')
 
 @app.route('/nosotros')
 def nosotros():
