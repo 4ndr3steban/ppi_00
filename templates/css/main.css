@@ -99,11 +99,6 @@ section {
   margin-top: 3em;
 }
 
-.ingresar-campos {
-  background: #20272E;
-  color: white;
-}
-
 .campos-list {
   margin: 0;
   padding-left: 0.1em;
@@ -128,8 +123,20 @@ section {
   margin-right: 1em;
 }
 
+.campos-list {
+  margin: 0;
+  padding-left: 0.1em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
+}
+
 .ingresar-campos img {
   display: none;
+}
+
+.ingresar-campos {
+  background: #20272E;
+  color: white;
 }
 
 h2 {
@@ -230,6 +237,11 @@ nav li a:hover {
   float: right;
   margin: 0.5em;
   cursor: pointer;
+}
+
+.about-header-content {
+  text-align: center;
+  max-width: 50em;
 }
 
 @media only screen and (min-width: 768px) {
@@ -355,7 +367,7 @@ nav li a:hover {
   .ingresar-campos:before {
     content: "";
     position: absolute;
-    width: 10%;
+    width: 7%;
     height: 20em;
     background: var(--primary-color);
     left: 0;
@@ -367,9 +379,10 @@ nav li a:hover {
     width: 200px;
     height: 20em;
     background: url("../images/dots.svg") no-repeat;
-    left: 7.2em;
-    top: 2em;
+    left: 2em;
+    top: 13em;
   }
+
 }
 .footer-container {
   background-color: lightgray;
