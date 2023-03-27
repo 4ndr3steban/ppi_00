@@ -12,7 +12,7 @@
 
 - Correcciones y ajustes con base a lo realizado en el informe 3.
 
-- guardar los registros de los productos en una base de datos para ser usados en la aplicación (mostrados en la página web).
+- guardar los registros de los productos en una base de datos de MySQL para ser usados en la aplicación (mostrados en la página web).
 
 ### Informe 05
 
@@ -42,9 +42,15 @@
     - Acceso a funcionalidades básicas de la aplicación sin registro (público en general).
     - Acceso a funcionalidades avanzadas de la aplicación con registro (usuarios registrados).
     - Funcionalidades específicas según el tema del proyecto.
-
-### Informe 10
+    - 
+- Se mejorarán aspectos que se consideren necesarios para el prototipo final.
 
 - Se harán cambios gráficos para tener una interfaz amigable y atractiva para los usuarios.
 
-- Se mejorarán aspectos que se consideren necesarios para el prototipo final.
+### Informe 10
+
+- Despliegue del prototipo final, limpieza del código y actualización de requerimientos.
+
+
+
+
