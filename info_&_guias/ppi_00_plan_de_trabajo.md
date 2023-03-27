@@ -49,7 +49,7 @@
 
 ### Informe 10
 
-- Despliegue del prototipo final, limpieza del código y actualización de requerimientos.
+- Despliegue del prototipo final, limpieza del código, corecciones del informe 09 y actualización de requerimientos.
 
 
 
