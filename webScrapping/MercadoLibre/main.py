@@ -1,6 +1,7 @@
 import json
 import requests
 from bs4 import BeautifulSoup
+import bd
 
 def guardar(producto):
     # Establecer la URL de la página que se quiere analizar
@@ -27,6 +28,33 @@ def guardar(producto):
     results = []
     n=0
     for li in li_list:
+
+        # Encontrar imagen (src)
+        """
+        try:
+            img = li.find('div', class_="slick-slide slick-active")['src']
+        except (KeyError, TypeError):
+            img = ""
+        """
+        # Busca la etiqueta img y obtiene el atributo src
+        
+        """
+        img = li.find('div', {'class': 'slick-slide slick-active'})
+        imagen = img.get('src') #if img else ''
+        """
+
+        img = li.find('div', {'data-index': '0'})
+        if img.find('img').get('src')!="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP": 
+            imagen = img.find('img').get('src')
+        else:
+            imagen = ''
+
+
+        """
+        img = li.find('img', {'class': 'ui-search-result-image__element shops__image-element'})
+        imagen = img.get('src') #if image else ''
+        """
+
         # Encontrar el enlace
         try:
             link = li.find('a', class_='ui-search-link')['href']
@@ -61,6 +89,7 @@ def guardar(producto):
         n+=1
         result = {
             "Resultado # ": n,
+            "imagen": imagen,
             "link": link,
             "titulo": titulo,
             "precio": precio,
@@ -73,10 +102,15 @@ def guardar(producto):
     with open("data_"+producto+".json", "w") as outfile:
         json.dump(results, outfile)
 
+    print(producto, outfile.name)
+
+    # Ejecutar funcion que crea la tabla e inserta los datos del producto (contenidos en el .json) en ella
+    bd.GuardarBD(producto, outfile.name)
+
+
 # Definir el producto a buscar en Mercado Libre Colombia
 
 #busqueda=input('Escribe el producto que quieres comprar: ')
-busqueda='iphone 14'
+busqueda='iphone 12'
 
-# Ejecutar la funcion
 guardar(busqueda)

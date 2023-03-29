@@ -13,7 +13,7 @@ def run(producto):
     response=requests.get(url, headers = headers)
 
     #print(response)
-
+ 
     #verificar que la solicitud fue exitosa
     if response.status_code==200:
         content=response.content
