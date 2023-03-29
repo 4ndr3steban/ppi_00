@@ -1,11 +1,21 @@
 # --------------Librerias-------------------
 from flask import Flask, send_from_directory
 from flask import render_template
+from flaskext.mysql import MySQL
 import os
+
 
 # instanciación de la aplicación
 app = Flask(__name__)
 
+mysql = MySQL()
+
+app.config["MYSQL_DATABASE_HOST"] = "localhost"
+app.config["MYSQL_DATABASE_USER"] = "root"
+app.config["MYSQL_DATABASE_PASSWORD"] = "Juan1234"
+app.config["MYSQL_DATABASE_DB"] = "productos"
+
+mysql.init_app(app)
 
 # Ruta para la pagina inicial
 @app.route('/')
@@ -15,7 +25,14 @@ def inicio():
 # Ruta para la pagian del catalogo
 @app.route('/catalogo')
 def catalogo():
-    return render_template('catalogo.html') # Se retorna el html de la pagina de catalogo
+
+    conexion = mysql.connect()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT * FROM 'productos'")
+    products = cursor.fetchall()
+    conexion.commit()
+
+    return render_template('catalogo.html', products = products) # Se retorna el html de la pagina de catalogo
 
 # Ruta para la pagian de nosotros
 @app.route('/nosotros')
@@ -39,3 +56,5 @@ def img_link(img):
 
 
 
+if __name__ == "__main__":
+    app.run(debug=True)

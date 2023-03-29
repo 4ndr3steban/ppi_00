@@ -4,50 +4,26 @@
     <!-- contenedor con los productos que se exponen -->
     <div class="container">
         <div class="row">
-            <!-- producto 1 (ejemplo)-->
+            <!-- productos -->
+
+            {% for prod in products %}
             <div class="col-md-4">
                 <div class="card">
-                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/81lDOtJRTkL._AC_SL1500_.jpg" alt="Title">
+                    <img class="card-img-top" src={{ prod[0] }} alt="Title">
                     <div class="card-body">
-                        <h4 class="card-title">Nueva computadora portátil Acer Nitro 5 15.6"" FHD 144Hz i7-11800H 2.3GHz 8GB 512GB RTX 3050</h4>
-                        <a target="_blank" class="fcc-btn" href="https://www.amazon.com/-/es/Acer-Nitro-AN515-57-79TD-videojuegos-retroiluminado/dp/B09R65RN43/ref=sr_1_3?keywords=acer+nitro+5&qid=1679280305&sprefix=acer%2Caps%2C287&sr=8-3">Amazon - US$739.99</a>
+                        <h4 class="card-title">{{ prod[2] }}</h4>
+                        <a target="_blank" class="fcc-btn" >Precio: {{ prod[3] }}</a>
                         <br>
-                        <a target="_blank" class="fcc-btn" href="https://www.ebay.com/itm/225343738206?hash=item347788915e:g:VwoAAOSwgF9jveIZ&amdata=enc%3AAQAHAAAA4NiSGAqmO2GbO%2BMOORyypOUMpBdQZglIuryG1TKIMt5QlWJFEHg7KBtppdUdqdRC%2FlMdl66rUk6KQgS3xrNOZqa5DzbOQbynnMxjmmxH4hFGs9vxiTfd20OSqHBuUdZq2grhaXTzv3PBV1e4Wp06NoHpnOfXmRCKdtQpo4hpkAJ%2BkcWNyqyBDx7Gg%2BnWyUHETtmqPK%2FnOLsOA%2BV5e71yJJJnnArY9ecmSmz4GmaVEnxZOBmVHIt1TlBlKfseaZzYLhUundSBAitEvBeBOBWayz11ocSyaQmyIFt2aJbcWBUW%7Ctkp%3ABk9SR_jL1c7fYQ">Ebay - US$799.49</a>
+                        <a target="_blank" class="fcc-btn" href= {{ prod[1] }} >Pagina de venta</a>
                         <br>
-                        <a target="_blank" class="fcc-btn" href="https://es.aliexpress.com/item/1005005088369882.html?spm=a2g0o.productlist.main.23.48174326goFrRv&algo_pvid=0238bb59-c1bf-46a4-ada1-baa4d40721c1&algo_exp_id=0238bb59-c1bf-46a4-ada1-baa4d40721c1-11&pdp_ext_f=%7B%22sku_id%22%3A%2212000032013224916%22%7D&pdp_npi=3%40dis%21EUR%213759.91%211917.56%211804.76%21%21%21%21%402102196716792805904856929d071e%2112000032013224916%21sea%21ES%210&curPageLogUid=sua0JXQZJLBl">Aliexpress - US$1466.34</a> 
+                        <a target="_blank" class="fcc-btn" >Envio gratis: {{ prod[4] }}</a>
+                        <br>
+                        <a target="_blank" class="fcc-btn" >Mas vendido: {{ prod[5] }}</a> 
 
                     </div>
                 </div>
             </div>
-            <!-- producto 2 (ejemplo)-->
-            <div class="col-md-4">
-                <div class="card">
-                    <img class="card-img-top" src="https://i.ebayimg.com/images/g/TGsAAOSwuYxj9VXT/s-l500.png" alt="Title">
-                    <div class="card-body">
-                        <h4 class="card-title">Amazon Echo Dot con RELOJ 4ta Generación 2020 Alexa Altavoz Inteligente Azul Crepúsculo ¡NUEVO!</h4>
-                        <a target="_blank" class="fcc-btn" href="https://www.amazon.com/-/es/Generaci%C3%B3n-sonido-calidad-smart-Gris%C3%A1ceo/dp/B085HK4KL6/ref=sr_1_5?keywords=alexa&qid=1679280352&sprefix=ale%2Caps%2C213&sr=8-5">Amazon - US$49.99</a>
-                        <br>
-                        <a target="_blank" class="fcc-btn" href="https://www.ebay.com/itm/255987743095?hash=item3b9a0ef977:g:TGsAAOSwuYxj9VXT&amdata=enc%3AAQAHAAAA0L%2BxNGe%2FmDA2rzoYfHlCC76e12K6eVkCU0bL2q%2FhDjlX%2B2SGOFjOXb1XH9wgs2aNFZsDVnOcqofROAl8h8Xg40wwfcUrW8%2BZiOlBzgBODPVYyek4ZPoNPyWDxyaEfnHEz2l3iMRF5KO5diFXQzI1qRmHBaeKCjfmvkZEzAXhwlBmknlW2Ty%2B%2FTEit41l8flA%2BQXsCjzf8ZpzqpHIDMUwcTDe1xGpSiGuTVMLje4hOH1bmzxbjrpPgU73ppDKKUPkyYSaOq0cpFAzWM7bV5gPumw%3D%7Ctkp%3ABFBMlsnazt9h">Ebay - US$51.99</a>
-                        <br>
-                        <a target="_blank" class="fcc-btn" href="https://best.aliexpress.com/?lan=es&spm=a2g0o.productlist.1000002.1.48174326goFrRv&gatewayAdapt=glo2esp">Aliexpress - No se encuentra</a> 
-                    </div>
-                </div>
-            </div>
-            <!-- producto 3 (ejemplo) -->
-            <div class="col-md-4">
-                <div class="card">
-                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/61mpMH5TzkL._AC_SL1500_.jpg" alt="Title">
-                    <div class="card-body">
-                        <h4 class="card-title">Mouse para juegos con cable de alto rendimiento Logitech G502 HERO, sensor HERO 25K</h4>
-                        <a target="_blank" class="fcc-btn" href="https://www.amazon.com/-/es/Logitech-G502-HERO-rendimiento-programables/dp/B07GBZ4Q68/ref=sr_1_1?__mk_es_US=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1P6OZPEEBJAP2&keywords=g502&qid=1679280380&sprefix=g502%2Caps%2C203&sr=8-1">Amazon - US$39.99</a>
-                        <br>
-                        <a target="_blank" class="fcc-btn" href="https://www.ebay.com/itm/374368341658?epid=27031978818&hash=item572a178e9a:g:SOQAAOSwizpje9Sb&amdata=enc%3AAQAHAAAA0BfXu72wOSca2aUNC%2Fb99OCKHiCfRFdyR7q8oc8%2FxfN21xxFotYIrW3gr4MQ4C9P7EElIzqxw4488XkvgQnsyVFhaleXkECFvx5ZqOT6UPExJVVz8sX9uDTtdNienhK3z2%2BHsDWiZn6fXRJAMLOF63%2F2bpyZTCpOaxgukj7ouTpQhhmZdE4WYYYrii4u4qcH8%2F9bcONzcKaLAFIUBzsAkuQjBoVgU6n7FsN2lSbY3q5Sb0QULOxFJkTYTHruuUS7%2BSSqcP2pk7zxckR2cwRWh74%3D%7Ctkp%3ABFBMyqrezt9h">Ebay - US$29.99</a>
-                        <br>
-                        <a target="_blank" class="fcc-btn" href="https://es.aliexpress.com/item/1005004945755414.html?spm=a2g0o.productlist.main.1.7d094a7cD6necv&algo_pvid=3385a7b2-4cc3-4984-9310-f65b37a8084d&aem_p4p_detail=202303191950508748297649882630011910794&algo_exp_id=3385a7b2-4cc3-4984-9310-f65b37a8084d-0&pdp_ext_f=%7B%22sku_id%22%3A%2212000031109260877%22%7D&pdp_npi=3%40dis%21EUR%21169.23%21118.46%21%21%21%21%21%4021021d7b16792806504771836d06d0%2112000031109260877%21sea%21ES%210&curPageLogUid=27nXQ4574uAe&ad_pvid=202303191950508748297649882630011910794_1&ad_pvid=202303191950508748297649882630011910794_1">Aliexpress - US$116.41</a> 
-                    </div>
-                </div>
-            </div>
-            
+            {%  %}
         </div>
     </div>
 
