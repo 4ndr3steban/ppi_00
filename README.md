@@ -25,3 +25,7 @@ Al tener estos datos, la aplicación mostrará por pantalla un resumen de los re
 ### Uso del Aplicativo
 ***
 El aplicativo es una herramienta que permitirá buscar y comparar productos de diferentes vendedores utilizando filtros de precio y palabras claves. El proyecto entonces es útil tanto para el usuario (ya que este podrá comparar dichos productos y decidir en base a su propio criterio si desea comprar alguno de ellos) al igual que para las diferentes empresas aumentando sus ventas en línea.
+
+### Enlace a la Pagina
+***
+http://andr3steban.pythonanywhere.com/
