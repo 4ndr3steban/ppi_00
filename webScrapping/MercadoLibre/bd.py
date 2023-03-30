@@ -10,7 +10,7 @@ def GuardarBD(producto, Archivojson):
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='',
+        password='Juan1234',
         database='productos'
     )
 
@@ -25,7 +25,7 @@ def GuardarBD(producto, Archivojson):
     #crear la tabla
 
     #sql = f"CREATE TABLE `{producto}` (link VARCHAR(300), Titulo VARCHAR(200), Precio VARCHAR(20), EnvGratis VARCHAR(50), MasVendido VARCHAR(50))"
-    sql = f"CREATE TABLE `{producto}` (Imagen VARCHAR(300), link VARCHAR(300), Titulo VARCHAR(200), Precio int, EnvGratis VARCHAR(50), MasVendido VARCHAR(50))"
+    sql = f"CREATE TABLE `{producto}` (Imagen VARCHAR(1000), link VARCHAR(2000), Titulo VARCHAR(200), Precio int, EnvGratis VARCHAR(50), MasVendido VARCHAR(50))"
     #print(sql)
 
     cursor.execute(sql)
@@ -48,5 +48,6 @@ def GuardarBD(producto, Archivojson):
     # Guarda los cambios en la base de datos y cierra la conexión
     conn.commit()
     conn.close()
+
 
 #GuardarBD("iphone13", "data_iphone 13.json")

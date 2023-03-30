@@ -12,7 +12,7 @@ mysql = MySQL()
 
 app.config["MYSQL_DATABASE_HOST"] = "localhost"
 app.config["MYSQL_DATABASE_USER"] = "root"
-app.config["MYSQL_DATABASE_PASSWORD"] = ""
+app.config["MYSQL_DATABASE_PASSWORD"] = "Juan1234"
 app.config["MYSQL_DATABASE_DB"] = "productos"
 
 mysql.init_app(app)
@@ -28,7 +28,7 @@ def catalogo():
 
     conexion = mysql.connect()
     cursor = conexion.cursor()
-    cursor.execute("""SELECT * FROM iphone12""")
+    cursor.execute("""SELECT * FROM audifonossamsung""")
     products = cursor.fetchall()
     conexion.commit()
 

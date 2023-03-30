@@ -30,30 +30,12 @@ def guardar(producto):
     for li in li_list:
 
         # Encontrar imagen (src)
-        """
-        try:
-            img = li.find('div', class_="slick-slide slick-active")['src']
-        except (KeyError, TypeError):
-            img = ""
-        """
-        # Busca la etiqueta img y obtiene el atributo src
-        
-        """
-        img = li.find('div', {'class': 'slick-slide slick-active'})
-        imagen = img.get('src') #if img else ''
-        """
-
-        img = li.find('div', {'data-index': '0'})
-        if img.find('img').get('src')!="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP": 
-            imagen = img.find('img').get('src')
+    
+        img = li.find('div', {'class':'slick-slide slick-active'})
+        if img: #.find('img').get('src')!="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP": 
+            imagen = img.find('img').get('data-src')
         else:
             imagen = ''
-
-
-        """
-        img = li.find('img', {'class': 'ui-search-result-image__element shops__image-element'})
-        imagen = img.get('src') #if image else ''
-        """
 
         # Encontrar el enlace
         try:
@@ -111,6 +93,6 @@ def guardar(producto):
 # Definir el producto a buscar en Mercado Libre Colombia
 
 #busqueda=input('Escribe el producto que quieres comprar: ')
-busqueda='iphone 12'
+busqueda='audifonos samsung'
 
 guardar(busqueda)
