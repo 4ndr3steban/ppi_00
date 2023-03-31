@@ -8,13 +8,15 @@
                 <h1>Compara los Precios y Encuentra los Mejores Productos</h1>
 
                 <div class="hero-cta">
-                    <a href="" class="ingresar-cta">Ingresar</a>
-                    
+                    <a href="/catalogo" class="ingresar-cta">Ingresar</a>
+
                     <div class="search_box_wrap">
-                        <div class="search_box">
-                            <input type="text" name="searchbox" class="input_search" placeholder="Search">
+                        <div method class="search_box">
+                            <form name="formSearch" method="POST" class="search" autocomplete="off">
+                                <input type="search" name="busqueda" class="input_search" placeholder="Buscar" requeridas>
+                            </form>
                         </div>
-                        <div class="search_btn">
+                        <div type="submit" class="search_btn">
                             <span class="icon1">
                                 <ion-icon name="search-outline"></ion-icon>
                             </span>
@@ -28,7 +30,7 @@
                 </div>
             </div>
             
-            <img src="images/compare.svg" class="hero-img" alt="Ilustration">
+            <img src="static/images/compare.svg" class="hero-img" alt="Ilustration">
         </div>
     </section>
 
@@ -44,7 +46,7 @@
                 <li>Precio Deseado del Envio</li>
             </ul>
 
-            <img src="images/comp-precios.jpg" alt="comparacion de precios">
+            <img src="static/images/comp-precios.jpg" alt="comparacion de precios">
         </div>
     </section>
     <!-- seccion de las tiendas utilizadas para la informacion -->
@@ -52,9 +54,9 @@
         <div class="container">
             <h4>Las tiendas que se usan</h4>
             <div class="tiendas">
-                <div><img src="images/amazon-logo.png" width="60%"></div>
-                <div><img src="images/ebay-logo.png" width="60%"></div>
-                <div><img src="images/aliexpress-logo.png" width="60%"></div>
+                <div><img src="static/images/amazon-logo.png" width="60%"></div>
+                <div><img src="static/images/ebay-logo.png" width="60%"></div>
+                <div><img src="static/images/aliexpress-logo.png" width="60%"></div>
             </div>
         </div>
     </section>
