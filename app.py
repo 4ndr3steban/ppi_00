@@ -5,13 +5,12 @@ import os
 import main_ML
 
 
-
-
 # instanciación de la aplicación
 app = Flask(__name__)
 
 mysql = MySQL()
 
+# variables de configuracion de la base de datos
 app.config["MYSQL_DATABASE_HOST"] = 'sql10.freemysqlhosting.net'
 app.config["MYSQL_DATABASE_USER"] = 'sql10609996'
 app.config["MYSQL_DATABASE_PASSWORD"] = 'VYzVtXawXQ'
@@ -25,18 +24,23 @@ def inicio():
     return render_template('index.html') # Se retorna el html de la pagina de incio
 
 
+# Ruta para buscar un producto y mostrar los resultados 
 @app.route("/buscar-producto", methods = ["GET", "POST"])
 def buscar_producto():
     if request.method == "POST":
-        busqueda = request.form['busqueda']
-        main_ML.guardar(busqueda)
+        busqueda = request.form['busqueda'] # Se obtiene la busqueda que ingresa el usuario
+        main_ML.guardar(busqueda) # se guarda el producto buscado en una base de datos haciendo web scraping
 
-        aux = busqueda.replace(" ", "")
+        aux = busqueda.replace(" ", "") # Esta variable guarda el nombre de la tabla
+        
+        # Se genera una conexion a la base de datos y se extraen los productos recien guardados
         conexion = mysql.connect()
         cursor = conexion.cursor()
         cursor.execute("SELECT * FROM %s " % (aux))
         productos = cursor.fetchall()
         conexion.commit()
+
+        # Se muestran los resultados de la busqueda
         return render_template('resultbusqueda.html', productos = productos, busqueda = busqueda)
     
     return redirect("/")
