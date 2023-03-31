@@ -2,7 +2,8 @@ from flask import Flask, send_from_directory
 from flask import render_template, request, redirect
 from flaskext.mysql import MySQL
 import os
-from webScrapping.MercadoLibre import main_ML 
+import main_ML
+
 
 
 
@@ -28,7 +29,17 @@ def inicio():
 def buscar_producto():
     if request.method == "POST":
         busqueda = request.form['busqueda']
-      
+        main_ML.guardar(busqueda)
+
+        aux = busqueda.replace(" ", "")
+        conexion = mysql.connect()
+        cursor = conexion.cursor()
+        cursor.execute("SELECT * FROM %s " % (aux))
+        productos = cursor.fetchall()
+        conexion.commit()
+        return render_template('resultbusqueda.html', productos = productos, busqueda = busqueda)
+    
+    return redirect("/")
 
 
 # Ruta para la pagian del catalogo
