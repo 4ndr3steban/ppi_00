@@ -8,10 +8,10 @@ def GuardarBD(producto, Archivojson):
 
     # Conecta a la base de datos
     conn = pymysql.connect(
-        host='localhost',
-        user='root',
-        password='',
-        database='productos'
+        host='sql10.freemysqlhosting.net',
+        user='sql10609996',
+        password='VYzVtXawXQ',
+        database='sql10609996'
     )
 
     # Abre el archivo JSON
