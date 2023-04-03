@@ -26,10 +26,19 @@
                 <a href="#">Twitter</a>
             </div>
             <div class="footer-email-form">
-                <h2>Suscripción</h2>
-                <p>Para recibir informacion por correo electronico</p>
-                <input type="email" placeholder="Ingrese correo electrónico" id="footer-email">
-                <input type="submit" value="Suscribirme" id="footer-email-btn">
+                <h2>Correo electronico</h2>
+                <p>Para recibir informacion sobre eventos y promociones</p>
+                <form name="formemail" method="POST" action="guardar-email" class="search" autocomplete="off">
+                    <!-- input para ingresar el nombre del producto -->
+                    <input type="search" name="email_no_user" class="input_search" placeholder="ej: pricescaner@gmail.com" requeridas> 
+
+                    <!-- boton para buscar y mostrar los resultados -->
+                    <button type="submit" class="search__btn">
+                        <i class="bi bi-search search__icon"></i>
+                        Suscribirse
+                    </button>
+                
+                </form>
             </div>
         </div>
     </div>

@@ -10,7 +10,6 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-
 """
 # variables de configuracion de la base de datos online
 app.config["MYSQL_DATABASE_HOST"] = 'sql10.freemysqlhosting.net'
@@ -19,7 +18,7 @@ app.config["MYSQL_DATABASE_PASSWORD"] = 'VYzVtXawXQ'
 app.config["MYSQL_DATABASE_DB"] = 'sql10609996'
 """
 
-# variables de configuracion de la base de datos online
+# variables de configuracion de la base de datos de productos
 app.config["MYSQL_DATABASE_HOST"] = 'localhost'
 app.config["MYSQL_DATABASE_USER"] = 'root'
 app.config["MYSQL_DATABASE_PASSWORD"] = ''
@@ -89,6 +88,26 @@ def buscar_producto():
 
         # Se muestran los resultados de la busqueda
         return render_template('resultbusqueda.html', productos = productos, busqueda = busqueda)
+    
+    return redirect("/")
+
+
+@app.route("/guardar-email", methods = ["GET", "POST"])
+def guardar_email():
+    if request.method == "POST":
+
+        busqueda = request.form['email_no_user'] # Se obtiene la busqueda que ingresa el email
+        conexion = mysql.connect()
+        cursor = conexion.cursor()
+        print(busqueda)
+        try:
+            ingreso = f"INSERT INTO emails (mail) VALUES ('{busqueda}')"
+            cursor.execute(ingreso)
+        except:
+            pass
+        conexion.commit()
+        
+        return render_template('index.html')
     
     return redirect("/")
 
