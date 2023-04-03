@@ -53,6 +53,16 @@ def contactanos():
     return render_template('contactanos.html') # Se retorna el html de la pagina de contactanos
 
 
+@app.route('/signup', methods= ["GET", "POST"])
+def registro():
+    return render_template("signup.html")
+
+
+@app.route('/login', methods= ["GET", "POST"])
+def login():
+    return render_template("login.html")
+
+
 # Ruta para buscar un producto y mostrar los resultados 
 @app.route("/buscar-producto", methods = ["GET", "POST"])
 def buscar_producto():
