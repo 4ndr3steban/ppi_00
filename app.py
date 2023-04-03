@@ -10,40 +10,28 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-# variables de configuracion de la base de datos
+
+"""
+# variables de configuracion de la base de datos online
 app.config["MYSQL_DATABASE_HOST"] = 'sql10.freemysqlhosting.net'
 app.config["MYSQL_DATABASE_USER"] = 'sql10609996'
 app.config["MYSQL_DATABASE_PASSWORD"] = 'VYzVtXawXQ'
 app.config["MYSQL_DATABASE_DB"] = 'sql10609996'
+"""
+
+# variables de configuracion de la base de datos online
+app.config["MYSQL_DATABASE_HOST"] = 'localhost'
+app.config["MYSQL_DATABASE_USER"] = 'root'
+app.config["MYSQL_DATABASE_PASSWORD"] = ''
+app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)
+
 
 # Ruta para la pagina inicial
 @app.route('/', methods = ["GET", "POST"])
 def inicio():
     return render_template('index.html') # Se retorna el html de la pagina de incio
-
-
-# Ruta para buscar un producto y mostrar los resultados 
-@app.route("/buscar-producto", methods = ["GET", "POST"])
-def buscar_producto():
-    if request.method == "POST":
-        busqueda = request.form['busqueda'] # Se obtiene la busqueda que ingresa el usuario
-        main_ML.guardar(busqueda) # se guarda el producto buscado en una base de datos haciendo web scraping
-
-        aux = busqueda.replace(" ", "") # Esta variable guarda el nombre de la tabla
-        
-        # Se genera una conexion a la base de datos y se extraen los productos recien guardados
-        conexion = mysql.connect()
-        cursor = conexion.cursor()
-        cursor.execute("SELECT * FROM %s " % (aux))
-        productos = cursor.fetchall()
-        conexion.commit()
-
-        # Se muestran los resultados de la busqueda
-        return render_template('resultbusqueda.html', productos = productos, busqueda = busqueda)
-    
-    return redirect("/")
 
 
 # Ruta para la pagian del catalogo
@@ -63,6 +51,36 @@ def nosotros():
 @app.route('/contactanos', methods = ["Get"])
 def contactanos():
     return render_template('contactanos.html') # Se retorna el html de la pagina de contactanos
+
+
+# Ruta para buscar un producto y mostrar los resultados 
+@app.route("/buscar-producto", methods = ["GET", "POST"])
+def buscar_producto():
+    if request.method == "POST":
+
+        busqueda = request.form['busqueda'] # Se obtiene la busqueda que ingresa el usuario
+
+        try:
+            main_ML.guardar(busqueda) # se guarda el producto buscado en una base de datos haciendo web scraping
+        except:
+            pass
+
+        aux = busqueda.replace(" ", "") # Esta variable guarda el nombre de la tabla
+        
+        # Se genera una conexion a la base de datos y se extraen los productos recien guardados
+        conexion = mysql.connect()
+        cursor = conexion.cursor()
+        cursor.execute("SELECT * FROM %s " % (aux))
+        productos = cursor.fetchall()
+        conexion.commit()
+
+        # Eliminar del directorio de trabajo el archivo auxiliar creado para la base de datos
+        os.remove("data_"+aux+".json") 
+
+        # Se muestran los resultados de la busqueda
+        return render_template('resultbusqueda.html', productos = productos, busqueda = busqueda)
+    
+    return redirect("/")
 
 
 # Ruta para reconocer y usar los archivos css
