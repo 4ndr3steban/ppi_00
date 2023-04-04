@@ -1,6 +1,7 @@
 from flask import Flask, send_from_directory
 from flask import render_template, request, redirect
 from flaskext.mysql import MySQL
+from flask_mail import Mail, Message
 import os
 import main_ML
 
@@ -27,6 +28,16 @@ app.config["MYSQL_DATABASE_DB"] = 'productos'
 mysql.init_app(app)
 
 
+
+mail = Mail()  # Instanciamos un objeto de tipo Mail
+app.config['MAIL_SERVER']='smtp.mail.yahoo.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'pricescaner@yahoo.com'
+app.config['MAIL_PASSWORD'] = 'Ppi_0000'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail.init_app(app)
+
 # Ruta para la pagina inicial
 @app.route('/', methods = ["GET", "POST"])
 def inicio():
@@ -47,9 +58,24 @@ def nosotros():
 
 
 # Ruta para la pagian de contactanos 
-@app.route('/contactanos', methods = ["Get"])
-def contactanos():
-    return render_template('contactanos.html') # Se retorna el html de la pagina de contactanos
+@app.route('/contactanos', methods = ["GET","POST"])
+def contacto():
+
+    if request.method == "POST":
+        name = request.form['name']
+        email = request.form['email']
+        Mensaje = request.form['message']
+        print(name,email,Mensaje)
+
+        msg = Message("pricescaner_contacto", 
+                      sender=(name, email),
+                      recipients=["pricescaner@yahoo.com"])
+        
+        msg.body = Mensaje
+
+        mail.send(msg)
+
+    return render_template("contactanos.html") # Se retorna el html de la pagina de contactanos
 
 
 @app.route('/signup', methods= ["GET", "POST"])
@@ -122,7 +148,6 @@ def css_link(archivo):
 @app.route('/static/images/<img>', methods = ["Get"])
 def img_link(img):
     return send_from_directory(os.path.join('templates/static/images'), img) # Se retorna la direccion a la carpeta de las imagenes
-
 
 if __name__ == "__main__":
     app.run(debug=True)
