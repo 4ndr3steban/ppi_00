@@ -30,13 +30,16 @@ mysql.init_app(app)
 
 
 mail = Mail()  # Instanciamos un objeto de tipo Mail
-app.config['MAIL_SERVER']='smtp.mail.yahoo.com'
+app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'pricescaner@yahoo.com'
-app.config['MAIL_PASSWORD'] = 'Ppi_0000'
+app.config['MAIL_USERNAME'] = 'estebanmonsa2719@gmail.com'
+app.config['MAIL_PASSWORD'] = 'cxbwungqiydciwde'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
+
+
+app.secret_key = "price_scaner_ppi_00"
 
 # Ruta para la pagina inicial
 @app.route('/', methods = ["GET", "POST"])
@@ -65,11 +68,13 @@ def contacto():
         name = request.form['name']
         email = request.form['email']
         Mensaje = request.form['message']
+        #respuesta_del_captcha = request.form['g-recaptcha-response']
         print(name,email,Mensaje)
 
-        msg = Message("pricescaner_contacto", 
-                      sender=(name, email),
-                      recipients=["pricescaner@yahoo.com"])
+
+        msg = Message(f"pricescaner_contacto: {email}", 
+                  sender=(name, email),
+                  recipients=["pricescaner@yahoo.com"])
         
         msg.body = Mensaje
 
@@ -148,6 +153,7 @@ def css_link(archivo):
 @app.route('/static/images/<img>', methods = ["Get"])
 def img_link(img):
     return send_from_directory(os.path.join('templates/static/images'), img) # Se retorna la direccion a la carpeta de las imagenes
+
 
 if __name__ == "__main__":
     app.run(debug=True)
