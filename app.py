@@ -1,10 +1,14 @@
 from flask import Flask, send_from_directory
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, flash
 from flaskext.mysql import MySQL
 from flask_mail import Mail, Message
+from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_wtf import CSRFProtect
+from werkzeug.security import generate_password_hash
 import os
 import main_ML
-
+from modelos.Modelusuario import ModelUser
+from modelos.entidades.usuario import User
 
 # instanciación de la aplicación
 app = Flask(__name__)
@@ -38,8 +42,15 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
 
-
 app.secret_key = "price_scaner_ppi_00"
+
+login_manager_app = LoginManager(app)
+
+csrf = CSRFProtect()
+
+@login_manager_app.user_loader
+def load_user(id):
+    return ModelUser.get_by_id(mysql, id)
 
 # Ruta para la pagina inicial
 @app.route('/', methods = ["GET", "POST"])
@@ -58,6 +69,12 @@ def catalogo():
 @app.route('/nosotros', methods = ["Get"])
 def nosotros():
     return render_template('nosotros.html') # Se retorna el html de la pagina de nosotros
+
+# Ruta para la pagian de nosotros
+@app.route('/usuario', methods = ["Get"])
+@login_required
+def usuario():
+    return render_template('usuario.html') # Se retorna el html de la pagina de nosotros
 
 
 # Ruta para la pagian de contactanos 
@@ -85,12 +102,58 @@ def contacto():
 
 @app.route('/signup', methods= ["GET", "POST"])
 def registro():
+
+    if request.method == "POST":
+        name = request.form['nombre_reg']
+        email = request.form['email_reg']
+        password = request.form['pass_reg']
+
+        conexion = mysql.connect()
+        cursor = conexion.cursor()
+        cursor.execute("SELECT email FROM usuarios WHERE email = %s", (email))
+        aux = cursor.fetchone()
+        print(aux)
+        if aux == None:
+            cursor.execute("INSERT INTO usuarios (nombre, email, password) VALUES (%s,%s,%s)", 
+                           (name, email, generate_password_hash(password),))
+            conexion.commit()
+
+            flash("Usuario registrado, por favor inicie sesión")
+
+            return redirect('/login')
+        else:
+            flash("Usuario existente, por favor regisrtese con otro email")
+
+            return redirect('/signup')
+
     return render_template("signup.html")
 
 
 @app.route('/login', methods= ["GET", "POST"])
 def login():
+
+    if request.method == 'POST':
+
+        user = User(0, request.form['email_login'], request.form['pass_login'])
+        logged_user = ModelUser.login(mysql, user)
+        if logged_user != None:
+            if logged_user.password:
+                login_user(logged_user)
+                return redirect("/usuario")
+            else:
+                flash("Contraseña incorrecta...")
+                return render_template('login.html')
+        else:
+            flash("Usuario no encontrado...")
+            return render_template('login.html')
+
     return render_template("login.html")
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/')
 
 
 # Ruta para buscar un producto y mostrar los resultados 
@@ -155,5 +218,16 @@ def img_link(img):
     return send_from_directory(os.path.join('templates/static/images'), img) # Se retorna la direccion a la carpeta de las imagenes
 
 
+def status_401(error):
+    return redirect('/login')
+
+
+def status_404(error):
+    return "<h1>Página no encontrada</h1>", 404
+
+
 if __name__ == "__main__":
+    csrf.init_app(app)
+    app.register_error_handler(401, status_401)
+    app.register_error_handler(404, status_404)
     app.run(debug=True)

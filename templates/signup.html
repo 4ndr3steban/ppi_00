@@ -28,25 +28,38 @@
         <div class="formsignup">
             <div class="form-content">
                 <header>Signup</header>
+                
+                {% with messages = get_flashed_messages() %}
+
+                {% if messages %}
+                <br />
+                {% for message in messages %}
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                    <strong>{{ message }}</strong>
+                </div>
+                {% endfor %}
+                {% endif %}
+            
+                {% endwith %}
 
                 <!-- Para ingresar correo y clave -->
-                <form action="#">
+                <form action="signup" name="formregister" method="POST" class="register" autocomplete="off">
                     <div class="field input-field">
-                        <input type="email" placeholder="Email" class="input">
+                        <input type="name" name="nombre_reg" placeholder="Nombre" class="input">
                     </div>
                     
                     <div class="field input-field">
-                        <input type="email" placeholder="Email Again" class="input">
+                        <input type="email" name="email_reg" placeholder="Email" class="input">
                     </div>
                     
                     <div class="field input-field">
-                        <input type="password" placeholder="Password" class="password">
+                        <input type="password" name="pass_reg" placeholder="Password" class="password">
                         <i class='bx bx-hide eye-icon'></i>
                     </div>
                     
 
                     <div class="field button-field">
-                        <button>Sign Up</button>
+                        <button type="submit" class="signup__btn">Sign Up</button>
                     </div>
                 </form>
 
