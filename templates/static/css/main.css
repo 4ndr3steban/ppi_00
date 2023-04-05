@@ -7,6 +7,7 @@ html {
   scroll-behavior: smooth;
 }
 
+/* For the search box*/
 * {
   margin: 0;
   padding: 0;
@@ -31,99 +32,9 @@ html {
   justify-content: center;
 }
 
-.search_box_wrap {
-  position: relative;
-  width: 350px;
-  height: 60px;
-  margin: 1em;
-}
+/* End of search box*/
 
-.search_box_wrap .search_box {
-  width: 100%;
-  height: 60px;
-  display: block;
-}
-
-.search_box_wrap .search_box .input_search {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 0;
-  border: 0;
-  height: 60px;
-  padding: 12px 0px;
-  padding-right: 60px;
-  font-size: 16px;
-  border-radius: 35px;
-  color: var(--primary-color);
-  transition: all 1000ms ease;
-}
-
-.search_box_wrap .icon1 {
-  display: flex;
-}
-
-.search_box_wrap .search_btn,
-.search_box_wrap .close_btn {
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 1000ms ease;
-}
-
-.search_box_wrap .search_btn {
-  color: white;
-  background: #4199f0;
-  top: 0;
-  right: 0px;
-  font-size: 20px;
-  z-index: 999;
-}
-
-.search_box_wrap .close_btn {
-  color: white;
-  background: #4199f0;
-  top: 0px;
-  right: 0px;
-  font-size: 25px;
-  opacity: 0;
-}
-
-.search_box_wrap .search_btn:hover {
-  background: var(--primary-color);
-}
-
-.search_box_wrap .close_btn:hover {
-  background: var(--primary-color);
-}
-
-.search_box_wrap.active .search_btn {
-  top: 5px;
-  right: 5px;
-  width: 50px;
-  height: 50px;
-}
-
-.search_box_wrap.active .close_btn {
-  opacity: 1;
-  transform: rotate(360deg);
-  right: -90px;
-}
-
-.search_box_wrap.active .search_box .input_search {
-  padding: 12px 25px;
-  padding-right: 70px;
-  width: 100%;
-  margin: 0em;
-  transition: all 1000ms ease;
-  transition-delay: none;
-}
-
+/* Para la barra de navegacion */
 body {
   background: #F2F2F2;
   margin: 0;
@@ -168,149 +79,7 @@ ul {
   padding: 0;
 }
 
-section {
-  padding: 3em 2em;
-}
-
-.hero {
-  text-align: center;
-}
-
-.left-col .subhead {
-  text-transform: uppercase;
-  font-weight: bold;
-  color: gray;
-  letter-spacing: 0.5em;
-}
-.left-col h1 {
-  font-size: 2.5em;
-  line-height: 1.3em;
-  margin-top: 0.8em;
-}
-.left-col .ingresar-cta {
-  display: block;
-  text-decoration: none;
-  font-size: 1.2em;
-  font-weight: 700px;
-  margin-top: 1em;
-  padding: 0.8em 1.3em;
-}
-.left-col .buscar-cta {
-  color: var(--primary-color);
-  border: 3px solid var(--primary-color);
-  text-decoration: none;
-  padding: 0.6em 1.3em;
-  font-size: 1.4em;
-  border-radius: 5em;
-  font-weight: 700px;
-  display: inline-block;
-  margin-top: 1em;
-}
-.left-col .buscar-cta:hover {
-  background: var(--primary-color);
-  color: white;
-}
-
-.hero-img {
-  width: 60%;
-  margin-top: 3em;
-}
-
-.ingresar-campos {
-  background: #20272E;
-  color: white;
-}
-
-.campos-list {
-  margin: 0;
-  padding-left: 0.1em;
-  padding-top: 3em;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
-}
-.campos-list li {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 1em;
-  margin-left: 2em;
-  position: sticky;
-}
-.campos-list li:before {
-  content: "";
-  left: -2em;
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  background-image: url("../images/search4.svg");
-  background-size: contain;
-  margin-right: 1em;
-}
-
-.ingresar-campos img {
-  display: none;
-}
-
-h2 {
-  font-size: 2em;
-  padding-bottom: 1em;
-}
-
-section#tiendas-usadas h4 {
-  margin-top: 8rem;
-  text-align: center;
-  font-size: 1.5em;
-  text-transform: uppercase;
-  font-weight: 700;
-  letter-spacing: 0.5em;
-  color: gray;
-}
-
-.ingresar-campos img {
-  display: block;
-  right: 0;
-  width: 550px;
-  bottom: 3em;
-  margin-right: 2.5em;
-}
-
-section#tiendas-usadas .container .tiendas {
-  display: flex;
-  position: inline-block;
-  align-items: center;
-  margin-top: 5em;
-  margin-left: 5em;
-  padding-left: 3em;
-}
-
-label {
-  display: block;
-  font-size: 1.2em;
-  margin-bottom: 0.5em;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 0.8em;
-  margin-bottom: 1em;
-  border-radius: 0.3em;
-  border: 1px solid gray;
-  box-sizing: border-box;
-}
-
-.send-message-cta {
-  background-color: var(--primary-color);
-  color: white;
-  font-weight: bold;
-  font-size: 1.3em;
-  border: none;
-  margin-bottom: 5em;
-  border-radius: 5em;
-  display: inline-block;
-  padding: 0.8em 2em;
-  width: unset;
-  cursor: pointer;
-}
-
+/* Para que la barra de navegacion sea grande o pequeña */
 iframe {
   width: 100%;
   height: 300px;
@@ -345,6 +114,313 @@ nav li a:hover {
   font-weight: bold;
 }
 
+/* Termina la barra de navegacion */
+
+/* Para cuando se modifique el tamano */
+.mobile-menu-exit {
+  float: right;
+  margin: 0.5em;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  .mobile-menu, .mobile-menu-exit {
+    display: none;
+  }
+  .navBar .container {
+    display: grid;
+    grid-template-columns: 180px auto;
+    place-content: unset;
+  }
+  .navBar nav {
+    display: flex;
+    place-content: space-between;
+    background: none;
+    position: unset;
+    height: auto;
+    width: 100%;
+    padding: 0;
+  }
+  .navBar nav ul {
+    display: flex;
+  }
+  .navBar nav a {
+    color: black;
+    font-size: 1em;
+    padding: 0.1em 1em;
+  }
+  .navBar nav ul.primary-navegation {
+    margin: 0;
+  }
+  .navBar nav li.current a {
+    font-weight: bold;
+  }
+  .navBar nav li a:hover {
+    color: #4199f0;
+    border-bottom: 4px solid #4199f0;
+  }
+  .navBar nav li.log-in-cta a {
+    color: var(--primary-color);
+    border: 3px solid var(--primary-color);
+    font-weight: bold;
+    border-radius: 5em;
+    margin-top: -0.2em;
+  }
+  .navBar nav li.log-in-cta a:hover {
+    background: var(--primary-color);
+    color: white;
+  }
+}
+@media only screen and (min-width: 1080px) {
+  .container {
+    width: 1080px;
+    margin: 0 auto;
+  }
+  section {
+    padding: 5em 4em;
+  }
+  .hero .container {
+    display: flex;
+    place-content: space-between;
+    text-align: left;
+  }
+  .hero .container .left-col {
+    margin: 3em 3em 0 5em;
+  }
+  .hero .container .left-col h1 {
+    font-size: 3em;
+    width: 100%;
+  }
+  .hero-img {
+    width: 30%;
+    margin-right: 8em;
+  }
+  .hero-cta {
+    display: flex;
+  }
+
+  .primary-navegation {
+    margin-right: 1em;
+  }
+  ul.campos-list {
+    display: block;
+    margin-left: 5em;
+  }
+  ul.campos-list li {
+    font-size: 1.4em;
+  }
+  ul.campos-list li:before {
+    width: 30px;
+    height: 30px;
+  }
+  .ingresar-campos {
+    position: relative;
+  }
+  .ingresar-campos img {
+    display: block;
+    position: absolute;
+    right: 0;
+    width: 550px;
+    bottom: 3em;
+    margin-right: 2.5em;
+  }
+  .contact-question-section {
+    position: relative;
+    padding: 3em 2em;
+    margin: 3em 8em 0em 1em;
+  }
+  .contact-question-section .container {
+    display: flex;
+  }
+  .contact-right {
+    position: absolute;
+    right: 0;
+    top: 20%;
+    width: 45%;
+    height: 100%;
+  }
+  .contact-right iframe {
+    height: 100%;
+  }
+}
+@media only screen and (min-width: 1450px) {
+  .ingresar-campos:before {
+    content: "";
+    position: absolute;
+    width: 10%;
+    height: 20em;
+    background: var(--primary-color);
+    left: 0;
+    top: -4em;
+  }
+  .ingresar-campos:after {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 20em;
+    background: url("../images/dots.svg") no-repeat;
+    left: 3em;
+    top: 2em;
+  }
+}
+/* Termina aqui*/
+
+/* Para la Seccion de "Busca todo lo que necesitas" */
+section {
+  padding: 3em 2em;
+}
+
+.hero {
+  text-align: center;
+}
+
+.left-col .subhead {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: gray;
+  letter-spacing: 0.5em;
+}
+.left-col h1 {
+  font-size: 2.5em;
+  line-height: 1.3em;
+  margin-top: 0.8em;
+}
+.left-col .ingresar-cta {
+  display: block;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: 700px;
+  margin-top: 1em;
+  padding: 0.8em 1.3em;
+} 
+
+.left-col .buscar-cta {
+  color: var(--primary-color);
+  border: 3px solid var(--primary-color);
+  text-decoration: none;
+  padding: 0.6em 1.3em;
+  font-size: 1.4em;
+  border-radius: 5em;
+  font-weight: 700px;
+  display: inline-block;
+  margin-top: 1em;
+}
+.left-col .buscar-cta:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.hero-img {
+  width: 60%;
+  margin-top: 3em;
+}
+/* Termina la Seccion de "Busca todo lo que necesitas" */
+
+/* Para la Seccion de "Ingresar campos" */
+.ingresar-campos {
+  background: #20272E;
+  color: white;
+}
+
+.campos-list {
+  margin: 0;
+  padding-left: 0.1em;
+  padding-top: 3em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19em, 1fr));
+}
+.campos-list li {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 1em;
+  margin-left: 2em;
+  position: sticky;
+}
+.campos-list li:before {
+  content: "";
+  left: -2em;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-image: url("../images/search4.svg");
+  background-size: contain;
+  margin-right: 1em;
+}
+
+.ingresar-campos img {
+  display: none;
+}
+
+/* Termina seccion de "Ingresar campos" */
+
+/* Para seccion de "Contactanos" */
+label {
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border-radius: 0.3em;
+  border: 1px solid gray;
+  box-sizing: border-box;
+}
+
+.send-message-cta {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  border: none;
+  margin-bottom: 5em;
+  border-radius: 5em;
+  display: inline-block;
+  padding: 0.8em 2em;
+  width: unset;
+  cursor: pointer;
+}
+
+/* Termina seccion de "Contactanos" */
+
+/* Para seccion de "Tiendas usadas" */
+h2 {
+  font-size: 2em;
+  padding-bottom: 1em;
+}
+
+section#tiendas-usadas h4 {
+  margin-top: 8rem;
+  text-align: center;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  color: gray;
+}
+
+.ingresar-campos img {
+  display: block;
+  right: 0;
+  width: 550px;
+  bottom: 3em;
+  margin-right: 2.5em;
+}
+
+section#tiendas-usadas .container .tiendas {
+  display: flex;
+  position: inline-block;
+  align-items: center;
+  margin-top: 5em;
+  margin-left: 5em;
+  padding-left: 3em;
+}
+
+/* Termina seccion de "Tiendas Usadas" */
+
+/* Para seccion de "Nosotros" */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -427,6 +503,8 @@ nav li a:hover {
   margin: 0 auto;
 }
 
+/* Termina seccion de "Nosotros" */
+
 @media (max-width: 992px) {
   section {
     grid-template-columns: 1fr;
@@ -455,151 +533,8 @@ nav li a:hover {
     padding: 6px 10px;
   }
 }
-.mobile-menu-exit {
-  float: right;
-  margin: 0.5em;
-  cursor: pointer;
-}
 
-@media only screen and (min-width: 768px) {
-  .mobile-menu, .mobile-menu-exit {
-    display: none;
-  }
-  .navBar .container {
-    display: grid;
-    grid-template-columns: 180px auto;
-    place-content: unset;
-  }
-  .navBar nav {
-    display: flex;
-    place-content: space-between;
-    background: none;
-    position: unset;
-    height: auto;
-    width: 100%;
-    padding: 0;
-  }
-  .navBar nav ul {
-    display: flex;
-  }
-  .navBar nav a {
-    color: black;
-    font-size: 1em;
-    padding: 0.1em 1em;
-  }
-  .navBar nav ul.primary-navegation {
-    margin: 0;
-  }
-  .navBar nav li.current a {
-    font-weight: bold;
-  }
-  .navBar nav li a:hover {
-    color: #4199f0;
-    border-bottom: 4px solid #4199f0;
-  }
-  .navBar nav li.log-in-cta a {
-    color: var(--primary-color);
-    border: 3px solid var(--primary-color);
-    font-weight: bold;
-    border-radius: 5em;
-    margin-top: -0.2em;
-  }
-  .navBar nav li.log-in-cta a:hover {
-    background: var(--primary-color);
-    color: white;
-  }
-}
-@media only screen and (min-width: 1080px) {
-  .container {
-    width: 1080px;
-    margin: 0 auto;
-  }
-  section {
-    padding: 5em 4em;
-  }
-  .hero .container {
-    display: flex;
-    place-content: space-between;
-    text-align: left;
-  }
-  .hero .container .left-col {
-    margin: 3em 3em 0 5em;
-  }
-  .hero .container .left-col h1 {
-    font-size: 3em;
-    width: 100%;
-  }
-  .hero-img {
-    width: 30%;
-    margin-right: 8em;
-  }
-  .hero-cta {
-    display: flex;
-  }
-  .primary-navegation {
-    margin-right: 1em;
-  }
-  ul.campos-list {
-    display: block;
-    margin-left: 5em;
-  }
-  ul.campos-list li {
-    font-size: 1.4em;
-  }
-  ul.campos-list li:before {
-    width: 30px;
-    height: 30px;
-  }
-  .ingresar-campos {
-    position: relative;
-  }
-  .ingresar-campos img {
-    display: block;
-    position: absolute;
-    right: 0;
-    width: 550px;
-    bottom: 3em;
-    margin-right: 2.5em;
-  }
-  .contact-question-section {
-    position: relative;
-    padding: 3em 2em;
-    margin: 3em 8em 0em 1em;
-  }
-  .contact-question-section .container {
-    display: flex;
-  }
-  .contact-right {
-    position: absolute;
-    right: 0;
-    top: 20%;
-    width: 45%;
-    height: 100%;
-  }
-  .contact-right iframe {
-    height: 100%;
-  }
-}
-@media only screen and (min-width: 1450px) {
-  .ingresar-campos:before {
-    content: "";
-    position: absolute;
-    width: 10%;
-    height: 20em;
-    background: var(--primary-color);
-    left: 0;
-    top: -4em;
-  }
-  .ingresar-campos:after {
-    content: "";
-    position: absolute;
-    width: 200px;
-    height: 20em;
-    background: url("../images/dots.svg") no-repeat;
-    left: 3em;
-    top: 2em;
-  }
-}
+/*Seccion de pie*/
 .footer-container {
   background-color: lightgray;
   padding-top: 5em;
