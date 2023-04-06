@@ -30,8 +30,6 @@ app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)
 
-
-
 mail = Mail()  # Instanciamos un objeto de tipo Mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -48,6 +46,7 @@ login_manager_app = LoginManager(app)
 @login_manager_app.user_loader
 def load_user(id):
     return ModelUser.get_by_id(mysql, id)
+
 
 # Ruta para la pagina inicial
 @app.route('/', methods = ["GET", "POST"])
