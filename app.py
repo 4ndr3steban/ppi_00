@@ -61,6 +61,10 @@ def catalogo():
 
     return render_template('catalogo.html') # Se retorna el html de la pagina de catalogo
 
+# Ruta para la pagina de home
+@app.route('/home', methods = ["Get"])
+def home():
+    return render_template('home.html') # Se retorna el html de la pagina de home
 
 # Ruta para la pagian de nosotros
 @app.route('/nosotros', methods = ["Get"])
