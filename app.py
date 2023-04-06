@@ -119,7 +119,7 @@ def registro():
 
             return redirect('/login')
         else:
-            flash("Usuario existente, por favor regisrtese con otro email")
+            flash("Usuario existente, por favor registrese con otro email")
 
             return redirect('/signup')
 
