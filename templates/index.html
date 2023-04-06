@@ -11,14 +11,12 @@
                 <div class="hero-cta">
                     <a href="/catalogo" class="ingresar-cta">Ingresar</a>
                     
-                    <form name="formSearch" method="POST" action="buscar-producto" class="search" autocomplete="off">
-                        <!-- input para ingresar el nombre del producto -->
-                        <input type="search" name="busqueda" class="input_search" placeholder="Buscar" requeridas> 
-
-                        <!-- boton para buscar y mostrar los resultados -->
-                        <button type="submit" class="search__btn">Buscar</button>
-                    
-                    </form>
+                    <div class="find">
+                        <form class="boton-find">
+                            <input type="text" placeholder="Buscar">
+                            <button type="submit">Buscar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             

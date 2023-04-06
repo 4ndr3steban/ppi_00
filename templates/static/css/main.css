@@ -294,20 +294,42 @@ section {
   padding: 0.8em 1.3em;
 } 
 
-.left-col .buscar-cta {
-  color: var(--primary-color);
-  border: 3px solid var(--primary-color);
-  text-decoration: none;
-  padding: 0.6em 1.3em;
-  font-size: 1.4em;
-  border-radius: 5em;
-  font-weight: 700px;
-  display: inline-block;
-  margin-top: 1em;
+/* Para el boton de busqueda */
+.hero .container .left-col .hero-cta .find {
+  width: 100%;
+  height: 2vh;
+  /*align-items: center;*/
+  display: flex;
+  justify-content: center;
 }
-.left-col .buscar-cta:hover {
-  background: var(--primary-color);
-  color: white;
+
+.hero .container .left-col .hero-cta .find .boton-find {
+  margin-top: 1.3em;
+  background: #fff;
+  width: 350px;
+  height: 55px;
+  display: flex;
+}
+
+.hero .container .left-col .hero-cta .find .boton-find input {
+  flex: 1;
+  outline: none; 
+  font-family: "Poppins";
+  letter-spacing: 2px;
+  padding-left: 1.3em;
+  border-radius: 5px;
+}
+
+.hero .container .left-col .hero-cta .find .boton-find button {
+  background: #4199f0;
+  padding: 10px;
+  outline: none;
+  color: #fff;
+  letter-spacing: 3px;
+  cursor: pointer;
+  font-family: "Poppins";
+  font-weight: 500;
+  border-radius: 5px;
 }
 
 .hero-img {
@@ -535,6 +557,47 @@ section#tiendas-usadas .container .tiendas {
 }
 
 /*Seccion de pie*/
+
+/* Para el boton de suscripcion */
+.suscripcion {
+  width: 100%;
+  background: #F2F2F2;
+  /*align-items: center;*/
+  display: flexbox;
+  justify-content: center;
+}
+
+.boton-suscripcion {
+  margin-top: 1em;
+  background: #fff;
+  width: 500px;
+  height: 55px;
+  display: flex;
+}
+
+.boton-suscripcion input {
+  flex: 1;
+  outline: none; 
+  font-family: "Poppins";
+  letter-spacing: 1px;
+  padding-left: 1.3em;
+  border-radius: 5px;
+}
+
+.boton-suscripcion button {
+  background: #4199f0;
+  padding: 10px;
+  outline: none;
+  color: #fff;
+  letter-spacing: 2px;
+  cursor: pointer;
+  font-family: "Poppins";
+  font-weight: 400;
+  border-radius: 5px;
+}
+
+/* Termina el boton de suscripcion */
+
 .footer-container {
   background-color: lightgray;
   padding-top: 5em;
