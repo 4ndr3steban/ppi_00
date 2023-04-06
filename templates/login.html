@@ -43,8 +43,6 @@
 
                 <!-- Para ingresar correo y clave -->
                 <form action="login" name="formlogin" method="POST" class="login" autocomplete="off">
-
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     
                     <div class="field input-field">
                         <input type="email" placeholder="Email" name="email_login" class="input">

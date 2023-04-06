@@ -3,7 +3,6 @@ from flask import render_template, request, redirect, flash
 from flaskext.mysql import MySQL
 from flask_mail import Mail, Message
 from flask_login import LoginManager, login_user, logout_user, login_required
-from flask_wtf import CSRFProtect
 from werkzeug.security import generate_password_hash
 import os
 import main_ML
@@ -45,8 +44,6 @@ mail.init_app(app)
 app.secret_key = "price_scaner_ppi_00"
 
 login_manager_app = LoginManager(app)
-
-csrf = CSRFProtect()
 
 @login_manager_app.user_loader
 def load_user(id):
@@ -227,7 +224,6 @@ def status_404(error):
 
 
 if __name__ == "__main__":
-    csrf.init_app(app)
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run(debug=True)
