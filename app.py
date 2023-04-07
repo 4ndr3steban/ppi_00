@@ -22,7 +22,7 @@ app.config["MYSQL_DATABASE_PASSWORD"] = 'VYzVtXawXQ'
 app.config["MYSQL_DATABASE_DB"] = 'sql10609996'
 """
 
-# variables de configuracion de la base de datos de productos
+# variables de configuracion de la base de datos
 app.config["MYSQL_DATABASE_HOST"] = 'localhost'
 app.config["MYSQL_DATABASE_USER"] = 'root'
 app.config["MYSQL_DATABASE_PASSWORD"] = ''
@@ -30,7 +30,8 @@ app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)
 
-mail = Mail()  # Instanciamos un objeto de tipo Mail
+# Configuracion de las variables para enviar y recibir mensajes
+mail = Mail()  
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'pricescaner00@gmail.com'
@@ -39,8 +40,10 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
 
+# Llave para usar en las contraseñas (hash)
 app.secret_key = "price_scaner_ppi_00"
 
+# Gestion y manejo de sesiones 
 login_manager_app = LoginManager(app)
 
 @login_manager_app.user_loader
@@ -79,46 +82,59 @@ def nosotros():
 def contacto():
 
     if request.method == "POST":
+
+        # Variables tomadas del formulario de la vista "Contactanos"
         name = request.form['name']
         email = request.form['email']
         Mensaje = request.form['message']
-        #respuesta_del_captcha = request.form['g-recaptcha-response']
         print(name,email,Mensaje)
 
-
+        # Instancia del mensaje a enviar
         msg = Message(f"pricescaner_contacto: {email}", 
                   sender=(name, email),
                   recipients=["pricescaner@yahoo.com"])
         
+        # Cuerpo del mensaje
         msg.body = Mensaje
 
+        # Envío del mensaje
         mail.send(msg)
 
     return render_template("contactanos.html") # Se retorna el html de la pagina de contactanos
 
 
+# Ruta para el registro de usuarios
 @app.route('/signup', methods= ["GET", "POST"])
 def registro():
 
     if request.method == "POST":
+
+        # Variables tomadas del formulario de la vista "signup"
         name = request.form['nombre_reg']
         email = request.form['email_reg']
         password = request.form['pass_reg']
 
+        # Se genera la conexión con la base de datos
         conexion = mysql.connect()
         cursor = conexion.cursor()
+
+        # Variable para controlar si el usuario ya existía
         cursor.execute("SELECT email FROM usuarios WHERE email = %s", (email))
         aux = cursor.fetchone()
         print(aux)
         if aux == None:
+
+            # Si el usuario no existe se guarda en la base de datos
             cursor.execute("INSERT INTO usuarios (nombre, email, password) VALUES (%s,%s,%s)", 
                            (name, email, generate_password_hash(password),))
             conexion.commit()
 
             flash("Usuario registrado, por favor inicie sesión")
 
-            return redirect('/login')
+            return redirect('/login') # Se envia a logearse
         else:
+
+            # Se muesta un mensaje si el usuario es existente
             flash("Usuario existente, por favor registrese con otro email")
 
             return redirect('/signup')
@@ -126,27 +142,36 @@ def registro():
     return render_template("signup.html")
 
 
+# Ruta para el inicio de sesión de usuarios
 @app.route('/login', methods= ["GET", "POST"])
 def login():
 
     if request.method == 'POST':
 
+        # Se instancia un objeto usuario con los datos tomados del formulario
         user = User(0, request.form['email_login'], request.form['pass_login'])
         logged_user = ModelUser.login(mysql, user)
         if logged_user != None:
             if logged_user.password:
+
+                # Funcion para verificar el inicio de sesión del usuario en la bd
                 login_user(logged_user)
                 return redirect("/home")
             else:
+
+                # Control de contraseña
                 flash("Contraseña incorrecta...")
                 return render_template('login.html')
         else:
+
+            # Control de email
             flash("Usuario no encontrado...")
             return render_template('login.html')
 
     return render_template("login.html")
 
 
+# Ruta para terminar la sesión
 @app.route('/logout')
 def logout():
     logout_user()
@@ -188,10 +213,14 @@ def guardar_email():
     if request.method == "POST":
 
         busqueda = request.form['email_no_user'] # Se obtiene la busqueda que ingresa el email
+
+        # Se genera la conexión a la base de datos
         conexion = mysql.connect()
         cursor = conexion.cursor()
         print(busqueda)
         try:
+
+            # Se ingresa el correo si este es nuevo en la bd
             ingreso = f"INSERT INTO emails (mail) VALUES ('{busqueda}')"
             cursor.execute(ingreso)
         except:
@@ -215,10 +244,12 @@ def img_link(img):
     return send_from_directory(os.path.join('templates/static/images'), img) # Se retorna la direccion a la carpeta de las imagenes
 
 
+# Control para redireccionar cuando se intenta acceder a ciertas paginas sin logearse
 def status_401(error):
     return redirect('/login')
 
 
+# Control para paginas que no existen 
 def status_404(error):
     return "<h1>Página no encontrada</h1>", 404
 
