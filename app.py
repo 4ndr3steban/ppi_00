@@ -25,7 +25,7 @@ app.config["MYSQL_DATABASE_DB"] = 'sql10609996'
 # variables de configuracion de la base de datos de productos
 app.config["MYSQL_DATABASE_HOST"] = 'localhost'
 app.config["MYSQL_DATABASE_USER"] = 'root'
-app.config["MYSQL_DATABASE_PASSWORD"] = 'holamundo'
+app.config["MYSQL_DATABASE_PASSWORD"] = ''
 app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)
@@ -33,8 +33,8 @@ mysql.init_app(app)
 mail = Mail()  # Instanciamos un objeto de tipo Mail
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'estebanmonsa2719@gmail.com'
-app.config['MAIL_PASSWORD'] = 'cxbwungqiydciwde'
+app.config['MAIL_USERNAME'] = 'pricescaner00@gmail.com'
+app.config['MAIL_PASSWORD'] = 'oouprenmuskiqowu'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
