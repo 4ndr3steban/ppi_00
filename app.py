@@ -55,26 +55,23 @@ def inicio():
 
 
 # Ruta para la pagian del catalogo
-@app.route('/catalogo', methods = ["Get"])
+@app.route('/catalogo-reg', methods = ["GET"])
+@login_required
 def catalogo():
 
-    return render_template('catalogo.html') # Se retorna el html de la pagina de catalogo
+    return render_template('catalogo_reg.html') # Se retorna el html de la pagina de catalogo
 
 # Ruta para la pagina de home
-@app.route('/home', methods = ["Get"])
+@app.route('/home', methods = ["GET"])
+@login_required
 def home():
     return render_template('home.html') # Se retorna el html de la pagina de home
 
 # Ruta para la pagian de nosotros
-@app.route('/nosotros', methods = ["Get"])
+@app.route('/nosotros', methods = ["GET"])
 def nosotros():
     return render_template('nosotros.html') # Se retorna el html de la pagina de nosotros
 
-# Ruta para la pagian de nosotros
-@app.route('/usuario', methods = ["Get"])
-@login_required
-def usuario():
-    return render_template('usuario.html') # Se retorna el html de la pagina de nosotros
 
 
 # Ruta para la pagian de contactanos 
@@ -139,7 +136,7 @@ def login():
         if logged_user != None:
             if logged_user.password:
                 login_user(logged_user)
-                return redirect("/usuario")
+                return redirect("/home")
             else:
                 flash("Contraseña incorrecta...")
                 return render_template('login.html')
