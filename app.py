@@ -57,7 +57,7 @@ def inicio():
     return render_template('index.html') # Se retorna el html de la pagina de incio
 
 
-# Ruta para la pagian del catalogo
+# Ruta para la pagina del catalogo
 @app.route('/catalogo-reg', methods = ["GET"])
 @login_required
 def catalogo():

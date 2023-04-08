@@ -5,7 +5,7 @@ import bd
 
 def guardar(producto):
     # Establecer la URL de la página que se quiere analizar
-    url = 'https://listado.mercadolibre.com.co/'+producto
+    url = 'https://listado.mercadolibre.com.co/' + producto
 
     # Establecer los encabezados para la solicitud
     headers = {
@@ -81,7 +81,7 @@ def guardar(producto):
         results.append(result)
 
     # Abrir el archivo data.json y escribir los resultados en él
-    with open("data_"+producto+".json", "w") as outfile:
+    with open("data_" + producto + ".json", "w") as outfile:
         json.dump(results, outfile)
 
     print(producto, outfile.name)
