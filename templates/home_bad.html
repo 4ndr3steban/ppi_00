@@ -50,12 +50,20 @@
         <h1>Encuentra los mejores precios para tu producto ingresando los siguientes campos</h1>
     </div>
 
-    <section class="busq">
-        <form class="botones">
-            <label for="boton1">Producto:</label>
-            <input type="text" id="boton1" placeholder="Busca los productos">
+    <!-- barra de busqueda de productos -->
+    <div class="boton_busq">
+        <form class="boton-busqueda">
+            <input type="text" placeholder="Busca los productos">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
 
-            <label class for="price-range">Precio del Producto:</label>
+    <div class="line1"></div>
+
+    <!-- filtros para la busqueda de productos -->
+    <section class="rang-precio">
+        <form>
+            <label for="price-range">Precio del Producto:</label>
             <select id="price-range" class="escoger">
                 <option value="any">Cualquier precio</option>
                 <option value="0-100">0 - 100</option>
@@ -66,13 +74,20 @@
             <input type="number" id="min-price" name="min-price" min="0" step="10">
             <label for="max-price">Hasta:</label>
             <input type="number" id="max-price" name="max-price" min="0" step="10">
+            <button type="submit">Buscar</button>
+        </form>
+    </section>
 
+    <div class="line2"></div>
+
+    <!-- pregunta si se desea envio gratis -->
+    <section class="envio">
+        <form id="form1">
             <label for="shipping">Desea envio Gratis?</label>
             <select id="shipping" class="choose">
                 <option value="Si">Si</option>
                 <option value="No">No</option>
             </select>
-
             <button type="submit">Buscar</button>
         </form>
     </section>
@@ -109,8 +124,18 @@
         }
         });
 
+        searchForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const selectedPriceRange = selectPriceRange.value;
+        const minPrice = minPriceInput.value;
+        const maxPrice = maxPriceInput.value;
+        });
+
+    </script>
+
+    <script>
         const selectEnvio = document.getElementById("shipping");
-        const searchForm1 = document.querySelector("form");
+        const searchForm1 = document.querySelector("form1");
 
         selectEnvio.addEventListener("change", (event) => {
         const selectedOption = event.target.value;
@@ -118,16 +143,10 @@
 
         searchForm.addEventListener("submit", (event) => {
         event.preventDefault();
-        const selectedPriceRange = selectPriceRange.value;
-        const minPrice = minPriceInput.value;
-        const maxPrice = maxPriceInput.value;
         const selectedEnvio = selectEnvio.value;
         });
 
-
-
     </script>
-
     
 </body>
 </html>

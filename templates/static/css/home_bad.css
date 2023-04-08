@@ -143,6 +143,59 @@ nav li a:hover {
     }
 }
 
+/* Para el boton de busqueda */
+.boton_busq {
+    width: 100%;
+    height: 20vh;
+    background: #F2F2F2;
+    /*align-items: center;*/
+    display: flex;
+    justify-content: center;
+}
+
+.boton-busqueda {
+    margin-top: 7em;
+    background: #fff;
+    width: 600px;
+    height: 55px;
+    display: flex;
+}
+
+.boton-busqueda input {
+    flex: 1;
+    outline: none; 
+    border: none;
+    font-family: "Poppins";
+    letter-spacing: 2px;
+    padding-left: 1.3em;
+}
+
+.boton-busqueda button {
+    background: #4199f0;
+    padding: 10px;
+    outline: none;
+    color: #fff;
+    letter-spacing: 3px;
+    cursor: pointer;
+    font-family: "Poppins";
+    font-weight: 500;
+}
+
+/* Para linea */
+.line1 {
+    position: absolute;
+    height: .5px;
+    width: 100%;
+    margin-top: 4.5em;
+    background: #F2F2F2;
+    background-color: black;
+}
+
+.line1::before {
+    position: absolute;
+    color: black;
+}
+
 /* Para la frase */
 .head h1 {
     margin: 0;
@@ -155,27 +208,8 @@ nav li a:hover {
     font-size: 2em;
 }
 
-/* Para el boton de busqueda */
-.busq {
-    width: 100%;
-    height: 50vh;
-    background: #F2F2F2;
-    /*align-items: center;*/
-    display: flex;
-    justify-content: center;
-}
-
-.busq input {
-    flex: 1;
-    outline: none; 
-    border: none;
-    font-family: "Poppins";
-    letter-spacing: 1px;
-    padding-left: 1.3em;
-}
-
 /* Para rango de precio */
-.busq .botones {
+.rang-precio form {
     font-family: "Poppins";
     background: #F2F2F2;
     align-items: center;
@@ -186,7 +220,7 @@ nav li a:hover {
     text-align: center;
 }
 
-.busq .botones .escoger {
+.rang-precio form .escoger {
     font-family: "Poppins";
     letter-spacing: 1px;
     font-size: 16px;
@@ -194,7 +228,7 @@ nav li a:hover {
     margin-bottom: 2em;
 }
 
-.busq .botones label {
+.rang-precio form label {
     margin-right: 1rem;
     font-size: 18px;
     margin: 1em;
@@ -206,9 +240,43 @@ select, input[type="number"] {
     margin-right: 0.5rem;
 }
 
-/* Para envio */
+.rang-precio button {
+    background: #4199f0;
+    color: #fff;
+    outline: none;
+    font-family: "Poppins";
+    letter-spacing: 1px;
+    cursor: pointer;
+}
 
-.busq .botones .choose {
+/* Para linea */
+.line2 {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    margin-top: 1.8em;
+    background: #F2F2F2;
+    background-color: black;
+}
+
+.line2::before {
+    position: absolute;
+    color: black;
+}
+
+/* Para envio */
+.envio form {
+    font-family: "Poppins";
+    background: #F2F2F2;
+    align-items: center;
+    justify-content: center;
+    padding-top: 4em;
+    padding-bottom: 5em;
+    font-weight: 600;
+    text-align: center;
+}
+
+.envio form .choose {
     font-family: "Poppins";
     letter-spacing: 1px;
     font-size: 16px;
@@ -216,7 +284,16 @@ select, input[type="number"] {
     margin-bottom: 2em;
 }
 
-.busq button {
+.envio form label {
+    margin-right: 1rem;
+    font-size: 18px;
+    margin: 1em;
+    margin-bottom: 2em;
+    letter-spacing: 1px;
+}
+
+
+.envio button {
     background: #4199f0;
     color: #fff;
     outline: none;
