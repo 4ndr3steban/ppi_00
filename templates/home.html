@@ -52,28 +52,36 @@
 
     <section class="busq">
         <form class="botones">
-            <label for="boton1">Producto:</label>
-            <input type="text" id="boton1" placeholder="Busca los productos">
+            <section class="s1">
+                <label for="boton1">Producto:</label>
+                <input type="text" id="boton1" placeholder="Busca los productos">
+            </section>
 
-            <label class for="price-range">Precio del Producto:</label>
-            <select id="price-range" class="escoger">
-                <option value="any">Cualquier precio</option>
-                <option value="0-100">0 - 100</option>
-                <option value="100-500">100 - 500</option>
-                <option value="500-1000">500 - 1000</option>
-            </select>
-            <label for="min-price">Desde:</label>
-            <input type="number" id="min-price" name="min-price" min="0" step="10">
-            <label for="max-price">Hasta:</label>
-            <input type="number" id="max-price" name="max-price" min="0" step="10">
+            <section class="s2">
+                <label class for="price-range">Precio del Producto:</label>
+                <select id="price-range" class="escoger">
+                    <option value="any">Cualquier precio</option>
+                    <option value="0-100">0 - 100</option>
+                    <option value="100-500">100 - 500</option>
+                    <option value="500-1000">500 - 1000</option>
+                </select>
+                <label for="min-price">Desde:</label>
+                <input type="number" id="min-price" name="min-price" min="0" step="10">
+                <label for="max-price">Hasta:</label>
+                <input type="number" id="max-price" name="max-price" min="0" step="10">
 
-            <label for="shipping">Desea envio Gratis?</label>
-            <select id="shipping" class="choose">
-                <option value="Si">Si</option>
-                <option value="No">No</option>
-            </select>
-
-            <button type="submit">Buscar</button>
+            </section>
+            <section class="s3">
+                <label for="shipping">Desea envio Gratis?</label>
+                <select id="shipping" class="choose">
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+            </section>
+            
+            <section class="s3">
+                <button type="submit">Buscar</button>
+            </section>
         </form>
     </section>
 
