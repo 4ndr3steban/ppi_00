@@ -1,3 +1,5 @@
+"""
+
 from flask import Flask, send_from_directory
 from flask import render_template, request, redirect, flash
 from flaskext.mysql import MySQL
@@ -258,3 +260,5 @@ if __name__ == "__main__":
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run(debug=True)
+
+"""
