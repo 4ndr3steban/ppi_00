@@ -30,6 +30,7 @@ def GuardarBD(producto, Archivojson):
 
     cursor.execute(sql)
 
+    
     # Recorre la lista de productos y guarda los datos en la tabla
     for prod in prods:
         imagen=prod['imagen']
@@ -45,7 +46,7 @@ def GuardarBD(producto, Archivojson):
         mas_vendido = prod['MasVendido']
         consulta = f"INSERT INTO {producto} (imagen, Link, Titulo, Precio, EnvGratis, MasVendido) VALUES ('{imagen}', '{link}', '{titulo}', '{precio}', '{env_gratis}', '{mas_vendido}')"
         
-        #print(consulta)
+        print(consulta)
         cursor.execute(consulta)
         #print("h")
 
