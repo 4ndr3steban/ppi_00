@@ -1,5 +1,3 @@
-"""
-
 from flask import Flask, send_from_directory
 from flask import render_template, request, redirect, flash
 from flaskext.mysql import MySQL
@@ -7,7 +5,7 @@ from flask_mail import Mail, Message
 from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash
 import os
-import main_ML
+import main
 from modelos.Modelusuario import ModelUser
 from modelos.entidades.usuario import User
 
@@ -188,7 +186,7 @@ def buscar_producto():
         busqueda = request.form['busqueda'] # Se obtiene la busqueda que ingresa el usuario
 
         try:
-            main_ML.guardar(busqueda) # se guarda el producto buscado en una base de datos haciendo web scraping
+            main.guardar(busqueda) # se guarda el producto buscado en una base de datos haciendo web scraping
         except:
             pass
 
@@ -260,5 +258,3 @@ if __name__ == "__main__":
     app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run(debug=True)
-
-"""

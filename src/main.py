@@ -23,5 +23,5 @@ def guardar(producto):
 # Definir el producto a buscar en Mercado Libre Colombia
 
 #busqueda=input('Escribe el producto que quieres comprar: ')
-busqueda='iPad'
-guardar(busqueda)
+#busqueda='iPad'
+#guardar(busqueda)
