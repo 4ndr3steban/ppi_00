@@ -200,7 +200,7 @@ def buscar_producto():
         conexion.commit()
 
         # Eliminar del directorio de trabajo el archivo auxiliar creado para la base de datos
-        os.remove("data_"+aux+".json") 
+        os.remove("data_"+busqueda+".json") 
 
         # Se muestran los resultados de la busqueda
         return render_template('resultbusqueda.html', productos = productos, busqueda = busqueda)
