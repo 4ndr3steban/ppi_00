@@ -25,7 +25,7 @@ app.config["MYSQL_DATABASE_DB"] = 'sql10609996'
 # variables de configuracion de la base de datos
 app.config["MYSQL_DATABASE_HOST"] = 'localhost'
 app.config["MYSQL_DATABASE_USER"] = 'root'
-app.config["MYSQL_DATABASE_PASSWORD"] = 'Juan1234'
+app.config["MYSQL_DATABASE_PASSWORD"] = ''
 app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)
@@ -35,7 +35,7 @@ mail = Mail()
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'pricescaner00@gmail.com'
-app.config['MAIL_PASSWORD'] = 'oouprenmuskiqowu'
+app.config['MAIL_PASSWORD'] = 'vaecmknlgxzduxyo'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
@@ -197,6 +197,7 @@ def buscar_producto():
         cursor = conexion.cursor()
         cursor.execute("SELECT * FROM %s " % (aux))
         productos = cursor.fetchall()
+        print(productos)
         conexion.commit()
 
         # Eliminar del directorio de trabajo el archivo auxiliar creado para la base de datos
