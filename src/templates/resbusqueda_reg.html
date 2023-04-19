@@ -1,0 +1,60 @@
+{% extends 'catalogo_reg.html' %}
+
+{% block catalgreg %}
+
+<br>
+<!-- contenedor con los productos que se exponen -->
+<div class="container">
+    <div class="row">
+        <!-- condicional para verificar que el producto buscado exista -->
+        {% if (productos) %}
+        
+        <!-- div con la organizacion de todos los productos encontrados -->
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                    {% for prod in productos %}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img class="card-img-top" width="20" height="315" src={{ prod[0] }} alt="Imagen del producto">
+                            <div class="card-body">
+                                <p class="card-text">{{ prod[2] }}</p>
+                                <p class="card-text"><b>$ {{ prod[3] }}</b></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a target="_blank" class="fcc-btn" href= {{ prod[1] }} >Pagina de venta</a></button>
+                                    </div>
+                                    <small class="text-body-secondary">Datos adicionales:</small>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-body-secondary"></small>
+                                    <small class="text-body-secondary">{{ prod[4] }}</small>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-body-secondary"></small>
+                                    <small class="text-body-secondary">{{ prod[5] }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>    
+            </div>
+        </div>
+        
+        <!-- else por si el producto buscado no existe -->
+        {% else %}
+        <p>
+            No hay resultados para la busqueda:
+            <strong class="busq colorCrimson"> {{ busqueda }}</strong>
+        </p>
+
+        <p>
+            Intente cambiar los parametros:
+            <strong class="busq colorCrimson"> Rango de precios o envio gratis</strong>
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

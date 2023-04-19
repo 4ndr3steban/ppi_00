@@ -209,6 +209,76 @@ def buscar_producto():
     return redirect("/")
 
 
+@app.route("/buscar-producto-reg", methods = ["GET", "POST"])
+def buscar_producto_reg():
+    if request.method == "POST":
+
+        busqueda_reg = request.form['busquedareg']
+        rango = [request.form['min-price'], request.form['max-price']]
+        envio = request.form['envio']
+
+        print(busqueda_reg, rango, envio)
+        try:
+            main.guardar(busqueda_reg) # se guarda el producto buscado en una base de datos haciendo web scraping
+        except:
+            pass
+
+        aux = busqueda_reg.replace(" ", "") # Esta variable guarda el nombre de la tabla
+        
+        # Se genera una conexion a la base de datos y se extraen los productos recien guardados
+        conexion = mysql.connect()
+        cursor = conexion.cursor()
+
+        if envio == "Si" and rango[0] != "" and rango[1] != "":
+            cursor.execute("SELECT * FROM %s WHERE Precio > %s AND Precio < %s AND EnvGratis != '' ORDER BY Precio " % (aux, rango[0], rango[1]))
+            productos = cursor.fetchall()
+            conexion.commit()
+
+        elif envio == "Si" and rango[0] != "":
+            cursor.execute("SELECT * FROM %s WHERE Precio > %s AND EnvGratis != '' ORDER BY Precio " % (aux, rango[0]))
+            productos = cursor.fetchall()
+            conexion.commit()
+        
+        elif envio == "Si" and rango[1] != "":
+            cursor.execute("SELECT * FROM %s WHERE Precio < %s AND EnvGratis != '' ORDER BY Precio " % (aux, rango[1]))
+            productos = cursor.fetchall()
+            conexion.commit()
+
+        elif envio == "Si":
+            cursor.execute("SELECT * FROM %s WHERE EnvGratis != '' ORDER BY Precio " % (aux))
+            productos = cursor.fetchall()
+            conexion.commit()
+
+        elif envio == "No" and rango[0] != "" and rango[1] != "":
+            cursor.execute("SELECT * FROM %s WHERE Precio > %s AND Precio < %s ORDER BY Precio" % (aux, rango[0], rango[1]))
+            productos = cursor.fetchall()
+            conexion.commit()
+
+        elif envio == "No" and rango[0] != "":
+            cursor.execute("SELECT * FROM %s WHERE Precio > %s ORDER BY Precio" % (aux, rango[0]))
+            productos = cursor.fetchall()
+            conexion.commit()
+        
+        elif envio == "No" and rango[1] != "":
+            cursor.execute("SELECT * FROM %s WHERE Precio < %s ORDER BY Precio" % (aux, rango[1]))
+            productos = cursor.fetchall()
+            conexion.commit()
+
+        else:
+            cursor.execute("SELECT * FROM %s ORDER BY Precio" % (aux))
+            productos = cursor.fetchall()
+            conexion.commit()
+        
+
+        # Eliminar del directorio de trabajo el archivo auxiliar creado para la base de datos
+        os.remove("data_"+busqueda_reg+".json") 
+        
+        # Se muestran los resultados de la busqueda
+        return render_template('resbusqueda_reg.html', productos = productos, busqueda = busqueda_reg)
+    return redirect("/")
+
+
+
 @app.route("/guardar-email", methods = ["GET", "POST"])
 def guardar_email():
     if request.method == "POST":

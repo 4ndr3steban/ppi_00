@@ -51,20 +51,14 @@
     </div>
 
     <section class="busq">
-        <form class="botones">
+        <form class="botones" name="formSearchReg" method="POST" action="buscar-producto-reg">
             <section class="s1">
                 <label for="boton1">Producto:</label>
-                <input type="text" id="boton1" placeholder="Busca los productos">
+                <input type="text" name="busquedareg" id="boton1" class="input_search" placeholder="Busca los productos" requeridas>
             </section>
 
             <section class="s2">
                 <label class for="price-range">Precio del Producto:</label>
-                <select id="price-range" class="escoger">
-                    <option value="any">Cualquier precio</option>
-                    <option value="0-100">0 - 100</option>
-                    <option value="100-500">100 - 500</option>
-                    <option value="500-1000">500 - 1000</option>
-                </select>
                 <label for="min-price">Desde:</label>
                 <input type="number" id="min-price" name="min-price" min="0" step="10">
                 <label for="max-price">Hasta:</label>
@@ -73,7 +67,7 @@
             </section>
             <section class="s3">
                 <label for="shipping">Desea envio Gratis?</label>
-                <select id="shipping" class="choose">
+                <select id="shipping" name="envio" class="choose">
                     <option value="Si">Si</option>
                     <option value="No">No</option>
                 </select>
@@ -84,58 +78,6 @@
             </section>
         </form>
     </section>
-
-    <script>
-        const mobileBtn = document.getElementById('mob-cta')
-            nav = document.querySelector('nav')
-            mobileBtnExit = document.getElementById('mob-exit'); 
-        
-        mobileBtn.addEventListener('click', () => {
-            nav.classList.add('menu-btn');
-        })
-
-        mobileBtnExit.addEventListener('click', () => {
-            nav.classList.remove('menu-btn');
-        })
-    </script>
-
-    <script>
-        const selectPriceRange = document.getElementById("price-range");
-        const minPriceInput = document.getElementById("min-price");
-        const maxPriceInput = document.getElementById("max-price");
-        const searchForm = document.querySelector("form");
-
-        selectPriceRange.addEventListener("change", (event) => {
-        const selectedOption = event.target.value;
-        if (selectedOption === "any") {
-            minPriceInput.value = "";
-            maxPriceInput.value = "";
-        } else {
-            const [minPrice, maxPrice] = selectedOption.split("-");
-            minPriceInput.value = minPrice;
-            maxPriceInput.value = maxPrice;
-        }
-        });
-
-        const selectEnvio = document.getElementById("shipping");
-        const searchForm1 = document.querySelector("form");
-
-        selectEnvio.addEventListener("change", (event) => {
-        const selectedOption = event.target.value;
-        });
-
-        searchForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const selectedPriceRange = selectPriceRange.value;
-        const minPrice = minPriceInput.value;
-        const maxPrice = maxPriceInput.value;
-        const selectedEnvio = selectEnvio.value;
-        });
-
-
-
-    </script>
-
     
 </body>
 </html>
