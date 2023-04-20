@@ -227,7 +227,7 @@ nav li a:hover {
   .contact-question-section {
     position: relative;
     padding: 3em 2em;
-    margin: 3em 8em 0em 1em;
+    margin: 8em 8em 0em 1em;
   }
   .contact-question-section .container {
     display: flex;
