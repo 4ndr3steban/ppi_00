@@ -48,8 +48,32 @@
 
     {% block catalgreg %}
 
-    <br>
-        <h2 class= "text-center"> aqui recomendaciones para usuarios registrados proximamente </h2>
-    </br>
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for ofer in ofertas %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img class="card-img-top" width="20" height="315" src={{ ofer[0] }} alt="Imagen del producto">
+                        <div class="card-body">
+                            <p class="card-text">{{ ofer[2] }}</p>
+                            <p class="card-text"><b>$ {{ ofer[3] }}</b></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"><a target="_blank" class="fcc-btn" href= {{ ofer[1] }} >Pagina de venta</a></button>
+                                </div>
+                                <small class="text-body-secondary">Datos adicionales:</small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-body-secondary"></small>
+                                <small class="text-body-secondary"><b>{{ ofer[5] }}</b></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>    
+        </div>
+    </div>
 
     {% endblock %}

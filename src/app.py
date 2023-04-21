@@ -25,7 +25,7 @@ app.config["MYSQL_DATABASE_DB"] = 'sql10609996'
 # variables de configuracion de la base de datos
 app.config["MYSQL_DATABASE_HOST"] = 'localhost'
 app.config["MYSQL_DATABASE_USER"] = 'root'
-app.config["MYSQL_DATABASE_PASSWORD"] = 'holamundo'
+app.config["MYSQL_DATABASE_PASSWORD"] = ''
 app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)
@@ -62,7 +62,14 @@ def inicio():
 @login_required
 def catalogo():
 
-    return render_template('catalogo_reg.html') # Se retorna el html de la pagina de catalogo
+    # Se genera una conexion a la base de datos y se extraen los productos recien guardados
+    conexion = mysql.connect()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT * FROM ofertas ")
+    ofertas = cursor.fetchall()
+    conexion.commit()
+
+    return render_template('catalogo_reg.html', ofertas = ofertas) # Se retorna el html de la pagina de catalogo
 
 # Ruta para la pagina de home
 @app.route('/home', methods = ["GET"])
