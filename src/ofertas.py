@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import pymysql
+import os
 
 # Establecer la URL de la página que se quiere analizar
 url = 'https://www.mercadolibre.com.co/ofertas?container_id=MCO779366-1#origin=scut&filter_position=1&is_recommended_domain=false'
@@ -102,11 +103,15 @@ cursor=conn.cursor()
 #crear la tabla
 
 #sql = f"CREATE TABLE `{producto}` (link VARCHAR(300), Titulo VARCHAR(200), Precio VARCHAR(20), EnvGratis VARCHAR(50), MasVendido VARCHAR(50))"
-sql = "CREATE TABLE ofertas (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio int, Envio VARCHAR(100), Descuento VARCHAR(100))"
-#print(sql)
 
-cursor.execute(sql)
+try:
+    # Crear la tabla en database de mysql
+    cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio int, Envio VARCHAR(100), Descuento VARCHAR(100))")
 
+except:
+    # Ejecutar la sentencia SQL para eliminar la tabla, en caso de que esté creada en la database y crearla de nuevo
+    cursor.execute("DROP TABLE OFERTAS")
+    cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio int, Envio VARCHAR(100), Descuento VARCHAR(100))")
 
 # Recorre la lista de productos y guarda los datos en la tabla
 for prod in prods:
@@ -121,10 +126,12 @@ for prod in prods:
             
     envio = prod['envio']
     descuento = prod['Descuento']
-    consulta = f"INSERT INTO ofertas (imagen, Link, Titulo, Precio, Envio, Descuento) VALUES ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}')"
-        
-    #print(consulta)
+    consulta = f"INSERT INTO OFERTAS (imagen, Link, Titulo, Precio, Envio, Descuento) VALUES ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}')"
+
     cursor.execute(consulta)
+
+# Eliminar el archivo .json
+os.remove("data_ofertas.json")
 
 # Guarda los cambios en la base de datos y cierra la conexión
 conn.commit()
