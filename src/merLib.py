@@ -25,7 +25,7 @@ def merLib1(producto, results):
     li_list = soup.find_all('li', class_='ui-search-layout__item shops__layout-item')
 
     #2
-    li_list = soup.find_all('li', class_='ui-search-layout__item')
+    #li_list = soup.find_all('li', class_='ui-search-layout__item')
 
     # Recorrer cada elemento li y extraer la información relevante
     #results = []
@@ -108,10 +108,7 @@ def merLib2(producto, results):
     # Analizar el contenido HTML de la página con BeautifulSoup
     soup = BeautifulSoup(response.content, 'html.parser')
 
-    # Encontrar todos los elementos li con class="ui-search-layout__item shops__layout-item"
-    li_list = soup.find_all('li', class_='ui-search-layout__item shops__layout-item')
-
-    #2
+    # Encontrar todos los elementos li con class="ui-search-layout__item"
     li_list = soup.find_all('li', class_='ui-search-layout__item')
 
     # Recorrer cada elemento li y extraer la información relevante
