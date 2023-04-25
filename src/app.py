@@ -1,9 +1,12 @@
 from flask import Flask, send_from_directory
-from flask import render_template, request, redirect, flash
+from flask import render_template, request, redirect, flash, current_app
 from flaskext.mysql import MySQL
 from flask_mail import Mail, Message
 from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash
+import logging
+from smtplib import SMTPException
+from threading import Thread
 import os
 import main
 from modelos.Modelusuario import ModelUser
@@ -14,14 +17,6 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-"""
-# variables de configuracion de la base de datos online
-app.config["MYSQL_DATABASE_HOST"] = 'sql10.freemysqlhosting.net'
-app.config["MYSQL_DATABASE_USER"] = 'sql10609996'
-app.config["MYSQL_DATABASE_PASSWORD"] = 'VYzVtXawXQ'
-app.config["MYSQL_DATABASE_DB"] = 'sql10609996'
-"""
-
 # variables de configuracion de la base de datos
 app.config["MYSQL_DATABASE_HOST"] = 'localhost'
 app.config["MYSQL_DATABASE_USER"] = 'root'
@@ -29,6 +24,7 @@ app.config["MYSQL_DATABASE_PASSWORD"] = ''
 app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)
+
 
 # Configuracion de las variables para enviar y recibir mensajes
 mail = Mail()  
@@ -39,6 +35,39 @@ app.config['MAIL_PASSWORD'] = 'vaecmknlgxzduxyo'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
+
+# Instancia para capturar errores en el envio de emails
+logger = logging.getLogger(__name__)
+
+
+# Funcion 1 para enviar correos de forma asincronica
+def _send_async_email(app, msg):
+    """Envia el mail con el metodo send
+    
+    captura el error de envio en caso de ocurrir
+    """
+
+    with app.app_context():
+        try:
+            mail.send(msg)
+        except SMTPException:
+            logger.exception("Ocurrió un error al enviar el email")
+
+
+# Funcion 2 para enviar correos de forma asincronica
+def send_email(subject, sender, recipients, text_body, cc=None, bcc=None, html_body=None):
+    """Crea la instancia del mensaje y lo envia
+    
+    llama a la funcion _send_async_email y la ejecuta por
+    otro hilo de procesamiento (se envia de forma asincronuca)
+    """
+
+    msg = Message(subject, sender=sender, recipients=recipients, cc=cc, bcc=bcc)
+    msg.body = text_body
+    if html_body:
+        msg.html = html_body
+    Thread(target=_send_async_email, args=(current_app._get_current_object(), msg)).start()
+
 
 # Llave para usar en las contraseñas (hash)
 app.secret_key = "price_scaner_ppi_00"
@@ -65,7 +94,7 @@ def catalogo():
     # Se genera una conexion a la base de datos y se extraen los productos recien guardados
     conexion = mysql.connect()
     cursor = conexion.cursor()
-    cursor.execute("SELECT * FROM ofertas ")
+    cursor.execute("SELECT * FROM ofertas")
     ofertas = cursor.fetchall()
     conexion.commit()
 
@@ -96,16 +125,10 @@ def contacto():
         Mensaje = request.form['message']
         print(name,email,Mensaje)
 
-        # Instancia del mensaje a enviar
-        msg = Message(f"pricescaner_contacto: {email}", 
-                  sender=(name, email),
-                  recipients=["pricescaner@yahoo.com"])
-        
-        # Cuerpo del mensaje
-        msg.body = Mensaje
-
-        # Envío del mensaje
-        mail.send(msg)
+        send_email(subject = f"pricescaner_contacto: {email}",
+                   sender = (name, email),
+                   recipients = ["pricescaner@yahoo.com"],
+                   text_body = Mensaje)
 
     return render_template("contactanos.html") # Se retorna el html de la pagina de contactanos
 
