@@ -26,7 +26,7 @@
     <section class="container form">
         <div class="formlogin">
             <div class="form-content">
-                <header>Login</header>
+                <header>Cambio de contraseña</header>
 
                 {% with messages = get_flashed_messages() %}
 
@@ -42,33 +42,22 @@
                 {% endwith %}
 
                 <!-- Para ingresar correo y clave -->
-                <form action="login" name="formlogin" method="POST" class="login" autocomplete="off">
+                <form action="#" name="formpassword" method="POST" class="login" autocomplete="off">
                     
                     <div class="field input-field">
-                        <input type="email" placeholder="Email" name="email_login" class="input">
-                    </div>
-                    
-                    <div class="field input-field">
-                        <input type="password" placeholder="Password" name="pass_login" class="password">
+                        <input type="password" placeholder="Password" name="respassword" class="password">
                         <i class='bx bx-hide eye-icon'></i>
                     </div>
-                    
-                    <div class="form-link">
-                        <a href="/restablecer-contrasena" class="forgot-pass">¿Olvidó su contraseña?</a>
+
+                    <div class="field input-field">
+                        <input type="password" placeholder="Password" name="reppassword" class="password">
+                        <i class='bx bx-hide eye-icon'></i>
                     </div>
 
                     <div class="field button-field">
-                        <button>Login</button>
+                        <button>Cambiar contraseña</button>
                     </div>
                 </form>
-
-                <!-- Para crear una cuenta (lleva al usuario a Signup) -->
-                <div class="form-link">
-                    <span>¿Todavía no tienes una cuenta? <a href="/signup" class="link signup-link">Signup</a></span>
-                </div>
-                <div class="form-link">
-                    <span>Regresar a la página de inicio <a href="/" class="link regresar-link">Regresar</a></span>
-                </div>
             </div>
 
         </div>

@@ -1,5 +1,5 @@
 from flask import Flask, send_from_directory
-from flask import render_template, request, redirect, flash, current_app
+from flask import render_template, request, redirect, flash, current_app, url_for
 from flaskext.mysql import MySQL
 from flask_mail import Mail, Message
 from flask_login import LoginManager, login_user, logout_user, login_required
@@ -31,7 +31,7 @@ mail = Mail()
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'pricescaner00@gmail.com'
-app.config['MAIL_PASSWORD'] = 'vaecmknlgxzduxyo'
+app.config['MAIL_PASSWORD'] = 'useogrmuixgzvqbx'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
@@ -159,13 +159,13 @@ def registro():
                            (name, email, generate_password_hash(password),))
             conexion.commit()
 
-            flash("Usuario registrado, por favor inicie sesión")
+            flash("Usuario registrado, por favor inicie sesión", "info")
 
             return redirect('/login') # Se envia a logearse
         else:
 
             # Se muesta un mensaje si el usuario es existente
-            flash("Usuario existente, por favor registrese con otro email")
+            flash("Usuario existente, por favor registrese con otro email", "warning")
 
             return redirect('/signup')
 
@@ -190,12 +190,12 @@ def login():
             else:
 
                 # Control de contraseña
-                flash("Contraseña incorrecta...")
+                flash("Contraseña incorrecta...", "warning")
                 return render_template('login.html')
         else:
 
             # Control de email
-            flash("Usuario no encontrado...")
+            flash("Usuario no encontrado...", category="error")
             return render_template('login.html')
 
     return render_template("login.html")
@@ -203,9 +203,74 @@ def login():
 
 # Ruta para terminar la sesión
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect('/')
+
+
+@app.route("/restablecer-contrasena", methods= ["GET", "POST"])
+def reset_request():
+
+    if request.method == "POST":
+
+        email_recp = request.form['email_reset_password']
+
+        conexion = mysql.connect()
+        cursor = conexion.cursor()
+
+        cursor.execute("SELECT id, email, nombre FROM usuarios WHERE email = %s", (email_recp))
+        aux = cursor.fetchone()
+
+        if aux == None:
+            flash("Usuario no encontrado...", "error")
+            
+        else:
+            user = User(aux[0], aux[1], None, aux[2])
+            token = user.get_reset_token()
+            print(token)
+            print(user.email)
+
+            send_email(subject = "[PRICESCANER] Restablecimiento de contraseña",
+                    sender = ("PRICESCANER", "pricescaner@yahoo.com"),
+                    recipients = [email_recp],
+                    text_body = ".",
+                    html_body = render_template("reset_email.html", user = user, token = token))
+
+            flash("Solicitud de restablecimiento enviada. Revise su correo", "info")
+            
+    
+    return render_template("reset_password.html")
+
+
+@app.route('/restablecer-contrasena-verificado/<token>', methods=['GET', 'POST'])
+def reset_verified(token):
+
+    user = User.verify_reset_token(token, mysql)
+    print(user[0])
+    if not user:
+        print('usuario no encontrado')
+        flash("Ocurrio un error. Intentelo nuevamente")
+        return redirect('/restablecer-contrasena')
+
+    if request.method == "POST":
+        password = request.form['respassword']
+        passwordsec = request.form['reppassword']
+
+        if password == passwordsec:
+            conexion = mysql.connect()
+            cursor = conexion.cursor()
+
+            cursor.execute("UPDATE productos.usuarios SET password = %s WHERE (nombre = %s)",
+                            (generate_password_hash(password), user[0]))
+            conexion.commit()
+            flash("Contraseña cambiada exitosamente")
+            return redirect('/login')
+        
+        else:
+            flash("Contraseñas diferentes. Intentelo de nuevo", "error")
+
+    return render_template('reset_verified.html')
 
 
 # Ruta para buscar un producto y mostrar los resultados 
