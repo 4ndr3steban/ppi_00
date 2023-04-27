@@ -20,7 +20,7 @@ mysql = MySQL()
 # variables de configuracion de la base de datos
 app.config["MYSQL_DATABASE_HOST"] = 'localhost'
 app.config["MYSQL_DATABASE_USER"] = 'root'
-app.config["MYSQL_DATABASE_PASSWORD"] = 'holamundo'
+app.config["MYSQL_DATABASE_PASSWORD"] = ''
 app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)
@@ -30,8 +30,8 @@ mysql.init_app(app)
 mail = Mail()  
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'pricescaner00@gmail.com'
-app.config['MAIL_PASSWORD'] = 'useogrmuixgzvqbx'
+app.config['MAIL_USERNAME'] = 'estebanmonsa2719@gmail.com'
+app.config['MAIL_PASSWORD'] = 'jzmvrscpohhiwhdv'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
@@ -209,28 +209,35 @@ def logout():
     return redirect('/')
 
 
+# Ruta para enviar el correo de cambio de contraseña
 @app.route("/restablecer-contrasena", methods= ["GET", "POST"])
 def reset_request():
 
     if request.method == "POST":
 
+        # Se recibe el email del usuario
         email_recp = request.form['email_reset_password']
 
         conexion = mysql.connect()
         cursor = conexion.cursor()
 
+        # Se compara con el email registrado
         cursor.execute("SELECT id, email, nombre FROM usuarios WHERE email = %s", (email_recp))
         aux = cursor.fetchone()
 
+        # Se comprueba que el email ingresado exista
         if aux == None:
             flash("Usuario no encontrado...", "error")
             
         else:
+
+            # Se extrae el usuario de la bd y se crea un token de seguridad
             user = User(aux[0], aux[1], None, aux[2])
             token = user.get_reset_token()
             print(token)
             print(user.email)
 
+            # Se envia el email con el link a la pagina de cambio de contraseña
             send_email(subject = "[PRICESCANER] Restablecimiento de contraseña",
                     sender = ("PRICESCANER", "pricescaner@yahoo.com"),
                     recipients = [email_recp],
@@ -243,24 +250,35 @@ def reset_request():
     return render_template("reset_password.html")
 
 
+# Ruta segura para cambiar la contraseña
 @app.route('/restablecer-contrasena-verificado/<token>', methods=['GET', 'POST'])
 def reset_verified(token):
 
-    user = User.verify_reset_token(token, mysql)
-    print(user[0])
+    try:
+        # Se verifica el token de seguridad enviado al email del usuario
+        user = User.verify_reset_token(token, mysql)
+        print(user[0])
+    except:
+        return "<p>El tiempo de uso de este link se ha vencido.</p>"
+
+    # Se controlan posibles errores de autenticación
     if not user:
         print('usuario no encontrado')
         flash("Ocurrio un error. Intentelo nuevamente")
         return redirect('/restablecer-contrasena')
 
     if request.method == "POST":
+
+        # Se recibe la nueva contraseña
         password = request.form['respassword']
         passwordsec = request.form['reppassword']
 
+        # Se compureba que se haya ingresado bien la contraseña
         if password == passwordsec:
             conexion = mysql.connect()
             cursor = conexion.cursor()
 
+            # Se cambia la contraseña vieja por la nueva
             cursor.execute("UPDATE productos.usuarios SET password = %s WHERE (nombre = %s)",
                             (generate_password_hash(password), user[0]))
             conexion.commit()
@@ -307,7 +325,8 @@ def buscar_producto():
 @app.route("/buscar-producto-reg", methods = ["GET", "POST"])
 def buscar_producto_reg():
     if request.method == "POST":
-
+        
+        # Se obtienen los datos del producto ingresado
         busqueda_reg = request.form['busquedareg']
         rango = [request.form['min-price'], request.form['max-price']]
         envio = request.form['envio']
@@ -324,6 +343,7 @@ def buscar_producto_reg():
         conexion = mysql.connect()
         cursor = conexion.cursor()
 
+        # Se tienen en cuenta las variantes de busqueda para extraer la lista de productos de la bd
         if envio == "Si" and rango[0] != "" and rango[1] != "":
             cursor.execute("SELECT * FROM %s WHERE Precio > %s AND Precio < %s AND EnvGratis != '' ORDER BY Precio " % (aux, rango[0], rango[1]))
             productos = cursor.fetchall()
