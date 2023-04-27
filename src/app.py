@@ -20,7 +20,7 @@ mysql = MySQL()
 # variables de configuracion de la base de datos
 app.config["MYSQL_DATABASE_HOST"] = 'localhost'
 app.config["MYSQL_DATABASE_USER"] = 'root'
-app.config["MYSQL_DATABASE_PASSWORD"] = ''
+app.config["MYSQL_DATABASE_PASSWORD"] = 'holamundo'
 app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)

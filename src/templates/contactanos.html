@@ -28,6 +28,60 @@
             </div>
         </div>
 
+        <section id="faqs">
+            <div class="container1">
+                <h2>Preguntas Frecuentes</h2>
+                <div class="content1">
+                    <article class="open">
+                        <div class="icon"><i class="uil uil-minus"></i></div>
+                        <div class="detail">
+                            <h4>Pregunta 1: Puedo comprar productos directamente con PriceScanner?</h4>
+                            <p>La aplicacion PriceScanner no permite hacer compras directamente, pero si proporciona la pagina oficial de la tienda del producto</p>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="icon"><i class="uil uil-plus"></i></div>
+                        <div class="detail">
+                            <h4>Pregunta 2: Cuales son las tiendas asociadas a la aplicacion?</h4>
+                            <p>Actualmente la aplicacion realiza un Web Scrapping a las siguientes tiendas: e-Bay y Mercado Libre</p>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="icon"><i class="uil uil-plus"></i></div>
+                        <div class="detail">
+                            <h4>Pregunta 3: Con que correo me puedo comunicar para solucionar mis dudas?</h4>
+                            <p>Puedes comunicarte a nuestro correo oficial: pricescanner@yahoo.es</p>
+                        </div>
+                    </article>
+                    <article>
+                        <div class="icon"><i class="uil uil-plus"></i></div>
+                        <div class="detail">
+                            <h4>Pregunta 4: Por que busco un producto y no me salen resultados?</h4>
+                            <p>Revisa bien la ortografia del producto, si aun asi no se muestra un resultado por pantalla es porque el producto que deseas encontrar no esta disponible en las tiendas oficiales, y por lo tanto, no se mostrara por medio de la aplicacion. </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
     </section>
+
+    <!--Javascript-->
+    <script>
+        const faqs = document.querySelectorAll('section#faqs article');
+
+        faqs.forEach(faq => {
+            faq.addEventListener('click', () => {
+                faq.classList.toggle('open');
+                //cambiar el icono
+                const icon = faq.querySelector('.icon i');
+                if(icon.className === 'uil uil-plus') {
+                    icon.className = 'uil uil-minus'
+                } else {
+                    icon.className = 'uil uil-plus'
+                }
+            })
+        })
+    </script>
 
 {% include "pie.html"  %}

@@ -88,7 +88,7 @@ with open("data_ofertas.json", "w") as outfile:
 conn = pymysql.connect(
     host='localhost',
     user='root',
-    password='',
+    password='holamundo',
     database='productos'
 )
 
