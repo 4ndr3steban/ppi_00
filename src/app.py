@@ -9,6 +9,7 @@ from smtplib import SMTPException
 from threading import Thread
 import os
 import main
+from ofertasML import generar_ofertas
 from modelos.Modelusuario import ModelUser
 from modelos.entidades.usuario import User
 
@@ -30,8 +31,8 @@ mysql.init_app(app)
 mail = Mail()  
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'pricescaner00@gmail.com'
-app.config['MAIL_PASSWORD'] = 'vdqtjjxbfellejeh'
+app.config['MAIL_USERNAME'] = 'pricescaner99@gmail.com'
+app.config['MAIL_PASSWORD'] = 'dqoogqbdnkoatrby'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
@@ -90,6 +91,8 @@ def inicio():
 @app.route('/catalogo-reg', methods = ["GET"])
 @login_required
 def catalogo():
+
+    generar_ofertas()
 
     # Se genera una conexion a la base de datos y se extraen los productos recien guardados
     conexion = mysql.connect()

@@ -92,7 +92,7 @@ def ofertasEB():
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='Juan1234',
+        password='',
         database='productos'
     )
 
@@ -142,7 +142,7 @@ def ofertasEB():
         cursor.execute(consulta)
 
     # Eliminar el archivo .json
-    #os.remove("data_ofertaseb.json")
+    os.remove("data_ofertaseb.json")
 
     # Guarda los cambios en la base de datos y cierra la conexión
     conn.commit()
