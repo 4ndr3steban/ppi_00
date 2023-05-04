@@ -107,12 +107,12 @@ cursor=conn.cursor()
 
 try:
     # Crear la tabla en database de mysql
-    cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio int, Envio VARCHAR(100), Descuento VARCHAR(100))")
+    cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100))")
 
 except:
     # Ejecutar la sentencia SQL para eliminar la tabla, en caso de que esté creada en la database y crearla de nuevo
     cursor.execute("DROP TABLE OFERTAS")
-    cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio int, Envio VARCHAR(100), Descuento VARCHAR(100))")
+    cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100))")
 
 # Recorre la lista de productos y guarda los datos en la tabla
 for prod in prods:
@@ -132,7 +132,7 @@ for prod in prods:
     cursor.execute(consulta)
 
 # Eliminar el archivo .json
-os.remove("data_ofertas.json")
+#os.remove("data_ofertas.json")
 
 # Guarda los cambios en la base de datos
 conn.commit()

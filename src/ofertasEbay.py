@@ -32,7 +32,7 @@ def ofertasEB():
         # Encontrar imagen (src)
         img = div.find('div', {'class': 'slashui-image-cntr'}) #promotion-item__img-container
         if img:
-            imagen = img.find('img').get('src')
+            imagen = img.find('img').get('data-src')
         else:
             imagen = ''
 
@@ -83,7 +83,7 @@ def ofertasEB():
         results.append(result)
 
     # Abrir el archivo data.json y escribir los resultados en él
-    with open("data_ofertas.json", "w") as outfile:
+    with open("data_ofertaseb.json", "w") as outfile:
         json.dump(results, outfile)
 
     # Crear la tabla e insertar los datos de las ofertas (contenidos en el .json) en ella
@@ -97,7 +97,7 @@ def ofertasEB():
     )
 
     # Abre el archivo JSON
-    with open("data_ofertas.json") as f:
+    with open("data_ofertaseb.json") as f:
         prods = json.load(f)
 
     ##falta validar que la tabla a crear todavía no esté creada, y si es así, borrarla
@@ -118,17 +118,22 @@ def ofertasEB():
         cursor.execute("DROP TABLE OFERTAS")
         cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio int, Envio VARCHAR(100), Descuento VARCHAR(100))")
     '''
-    
+
     # Recorre la lista de productos y guarda los datos en la tabla
     for prod in prods:
         imagen=prod['imagen']
         link = prod['link']
         titulo = prod['titulo']
-        #precio = prod['precio']
+        titulo = titulo.replace("'", "")
+
+        precio = prod['precio']
+        precio = precio.replace(u'\xa0',' ')
+        '''
         try:
             precio = (prod['precio']).replace(".","")
         except:
             precio= prod['precio']
+        '''
                 
         envio = prod['envio']
         descuento = prod['Descuento']
@@ -137,7 +142,7 @@ def ofertasEB():
         cursor.execute(consulta)
 
     # Eliminar el archivo .json
-    os.remove("data_ofertas.json")
+    #os.remove("data_ofertaseb.json")
 
     # Guarda los cambios en la base de datos y cierra la conexión
     conn.commit()
