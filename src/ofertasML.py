@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import json
 import pymysql
 import os
+import ofertasEbay
 
 # Establecer la URL de la página que se quiere analizar
 url = 'https://www.mercadolibre.com.co/ofertas?container_id=MCO779366-1#origin=scut&filter_position=1&is_recommended_domain=false'
@@ -88,7 +89,7 @@ with open("data_ofertas.json", "w") as outfile:
 conn = pymysql.connect(
     host='localhost',
     user='root',
-    password='',
+    password='Juan1234',
     database='productos'
 )
 
@@ -133,6 +134,11 @@ for prod in prods:
 # Eliminar el archivo .json
 os.remove("data_ofertas.json")
 
-# Guarda los cambios en la base de datos y cierra la conexión
+# Guarda los cambios en la base de datos
 conn.commit()
+
+# Consultar ofertas de eBay
+ofertasEbay.ofertasEB()
+
+# Cierra la conexión
 conn.close()
