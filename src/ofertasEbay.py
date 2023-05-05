@@ -27,20 +27,30 @@ def ofertasEB():
 
     # Recorrer cada elemento li y extraer la información relevante
     results = []
+
     n = 0
+    trash_price=["'","COP $", " "]
     for div in div_list:
         # Encontrar imagen (src)
         img = div.find('div', {'class': 'slashui-image-cntr'}) #promotion-item__img-container
         if img:
-            imagen = img.find('img').get('data-src')
+            imagen = img.find('img').get('src')
         else:
             imagen = ''
 
         # Encontrar el enlace
+        '''
         try:
             link = div.find('div', class_='dne-itemtile dne-itemtile-medium')['href']
         except (KeyError, TypeError):
             link = ""
+        '''
+        enlace = div.find('div', class_='dne-itemtile dne-itemtile-medium')
+        if enlace:
+            link = enlace.find('a').get('href')
+        else:
+            link = ''
+
 
         # Encontrar el título
         try:
@@ -51,6 +61,18 @@ def ofertasEB():
         # Intentar encontrar el precio
         try:
             precio = div.find('span', class_='first').text.strip()
+            pre=precio.replace("COP $","")
+            pre=pre.replace(" ","")
+            #pre=pre.replace(".","")
+            pre=pre.replace("$","")
+            pre=pre.replace("\u00a0","")
+            if pre.find("a")!=-1:
+                pre=pre[(pre.find("a")+1):len(precio)]
+
+            if pre.find(".")!=-1:
+                pre=pre[0:pre.find(".")]
+
+            precio=int(pre)
         except (AttributeError, TypeError):
             precio = ""
 
@@ -92,7 +114,7 @@ def ofertasEB():
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='',
+        password='Juan1234',
         database='productos'
     )
 
@@ -127,7 +149,6 @@ def ofertasEB():
         titulo = titulo.replace("'", "")
 
         precio = prod['precio']
-        precio = precio.replace(u'\xa0',' ')
         '''
         try:
             precio = (prod['precio']).replace(".","")

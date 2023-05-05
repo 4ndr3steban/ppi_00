@@ -91,7 +91,7 @@ def generar_ofertas():
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='',
+        password='Juan1234',
         database='productos'
     )
 
@@ -121,12 +121,8 @@ def generar_ofertas():
         imagen=prod['imagen']
         link = prod['link']
         titulo = prod['titulo']
-        #precio = prod['precio']
-        try:
-            precio = (prod['precio']).replace(".","")
-        except:
-            precio= prod['precio']
-                
+        
+        precio= prod['precio']     
         envio = prod['envio']
         descuento = prod['Descuento']
         consulta = f"INSERT INTO OFERTAS (imagen, Link, Titulo, Precio, Envio, Descuento) VALUES ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}')"
@@ -144,3 +140,5 @@ def generar_ofertas():
 
     # Cierra la conexión
     conn.close()
+
+generar_ofertas()
