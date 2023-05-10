@@ -154,3 +154,5 @@ def generar_ofertas():
 
     # Cierra la conexión
     conn.close()
+
+#generar_ofertas()

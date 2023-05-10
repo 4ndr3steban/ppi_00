@@ -31,8 +31,8 @@ mysql.init_app(app)
 mail = Mail()  
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'pricescaner99@gmail.com'
-app.config['MAIL_PASSWORD'] = 'xyresadogfpndlof'
+app.config['MAIL_USERNAME'] = 'pricescaner00@gmail.com'
+app.config['MAIL_PASSWORD'] = 'bbfpnktnwftlwyzv'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
@@ -109,6 +109,7 @@ def catalogo():
 @login_required
 def home():
     return render_template('home.html') # Se retorna el html de la pagina de home
+
 
 # Ruta para la pagian de nosotros
 @app.route('/nosotros', methods = ["GET"])
