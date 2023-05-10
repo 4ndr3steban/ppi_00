@@ -539,6 +539,9 @@ section#tiendas-usadas .container .tiendas {
   text-transform: uppercase;
   color: #3c3c3c;
   padding-bottom: 5px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  word-spacing: 5px;
 }
 
 .contenido span {
@@ -557,10 +560,13 @@ section#tiendas-usadas .container .tiendas {
   text-align: center;
   margin: 0 auto;
   line-height: 2;
+  font-size: 20px;
 }
 
 .links {
-  margin: 15px 0;
+  margin: 15px;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .links li {
