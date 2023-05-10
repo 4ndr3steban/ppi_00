@@ -2,6 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 
 def ebay1(producto, results):
+    """ Webscraping a la pagina www.ebay.com
+    
+    Se hace webscraping para encontrar las etiquetas de productos
+    y guardar sus principales datos como titulo, precio, link, imagen, etc.
+    """
+
     # Establecer la URL de la página que se quiere analizar
     url= 'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313&_nkw='+ producto+'&_sacat=0'
     # Establecer los encabezados para la solicitud
@@ -40,15 +46,17 @@ def ebay1(producto, results):
         try:
             link = li.find('a', class_='s-item__link')['href']
         except (KeyError, TypeError):
+            # Vacio si no encuentra el enlace
             link = ""
 
         # Encontrar el título
         try:
             titulo = li.find('div', class_='s-item__title').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no encuentra el titulo
             titulo = ""
 
-        # Intentar encontrar el precio
+        # Intentar encontrar el precio y le da formato
         try:
             precio = li.find('span', class_='s-item__price').text.strip()
             pre=precio.replace("COP $","")
@@ -65,13 +73,10 @@ def ebay1(producto, results):
             precio=int(pre)
             #precio=pre
         except (AttributeError, TypeError):
+            # Vacio si no encuentra el precio
             precio = ""
 
-        ## Intentar encontrar la etiqueta MasVendido
-        # try:
-        #     MasVendido = li.find('label', class_='ui-search-styled-label ui-search-item__highlight-label__text').text.strip()
-        # except (AttributeError, TypeError):
-        #     MasVendido = ""
+        # No se busca pero se usa para seguir el formato de la bd
         MasVendido = ""
         # Intentar encontrar la etiqueta EnvGratis
         try:
@@ -79,6 +84,7 @@ def ebay1(producto, results):
             if EnvGratis!="Env\u00edo internacional gratis":
                 EnvGratis=""
         except (AttributeError, TypeError):
+            # Vacio si no encuentra EnvGratis
             EnvGratis = ""
 
         # Agregar la información a la lista de resultados
@@ -96,4 +102,5 @@ def ebay1(producto, results):
             }
             results.append(result)
 
+    # Retornar la lista de resultados
     return results

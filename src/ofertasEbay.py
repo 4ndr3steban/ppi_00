@@ -5,6 +5,11 @@ import pymysql
 import os
 
 def ofertasEB():
+    """ Webscraping a ofertas de Ebay
+    
+    Se hace webscraping para encontrar las etiquetas de las ofertas
+    y guardar sus principales datos como titulo, precio, link, imagen, etc.
+    """
     # Establecer la URL de la página que se quiere analizar
     url = 'https://www.ebay.com/globaldeals'
 
@@ -36,19 +41,15 @@ def ofertasEB():
         if img:
             imagen = img.find('img').get('src')
         else:
+            # Vacio si no se encuetra la imagen
             imagen = ''
 
         # Encontrar el enlace
-        '''
-        try:
-            link = div.find('div', class_='dne-itemtile dne-itemtile-medium')['href']
-        except (KeyError, TypeError):
-            link = ""
-        '''
         enlace = div.find('div', class_='dne-itemtile dne-itemtile-medium')
         if enlace:
             link = enlace.find('a').get('href')
         else:
+            # Vacio si no se encuetra el enlace
             link = ''
 
 
@@ -56,9 +57,10 @@ def ofertasEB():
         try:
             titulo = div.find('span', class_='ebayui-ellipsis-2').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el titulo
             titulo = ""
 
-        # Intentar encontrar el precio
+        # Intentar encontrar el precio y darle formato
         try:
             precio = div.find('span', class_='first').text.strip()
             pre=precio.replace("COP $","")
@@ -74,12 +76,14 @@ def ofertasEB():
 
             precio=int(pre)
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el precio
             precio = ""
 
         # % de Descuento
         try:
             descuento = div.find('span', class_='itemtile-price-strikethrough').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el descuento
             descuento = ""
 
         # Envío
@@ -114,7 +118,7 @@ def ofertasEB():
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='holamundo',
+        password='',
         database='productos'
     )
 
@@ -125,21 +129,6 @@ def ofertasEB():
     ##falta validar que la tabla a crear todavía no esté creada, y si es así, borrarla
 
     cursor=conn.cursor()
-
-    #crear la tabla
-
-    #sql = f"CREATE TABLE `{producto}` (link VARCHAR(300), Titulo VARCHAR(200), Precio VARCHAR(20), EnvGratis VARCHAR(50), MasVendido VARCHAR(50))"
-
-    '''
-    try:
-        # Crear la tabla en database de mysql
-        cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio int, Envio VARCHAR(100), Descuento VARCHAR(100))")
-
-    except:
-        # Ejecutar la sentencia SQL para eliminar la tabla, en caso de que esté creada en la database y crearla de nuevo
-        cursor.execute("DROP TABLE OFERTAS")
-        cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio int, Envio VARCHAR(100), Descuento VARCHAR(100))")
-    '''
 
     # Recorre la lista de productos y guarda los datos en la tabla
     for prod in prods:

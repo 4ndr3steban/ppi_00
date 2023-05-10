@@ -6,6 +6,13 @@ import merLib
 import ebay
 
 def guardar(producto):
+    """ Conexion con la base de datos
+    
+    Se genera una conexion con la base de datos y se guarda
+    una tabla de prosuctos
+    """
+
+    # Listas para guardar los productos
     resultado=[]
     resultsMerLib = merLib.merLib1(producto, resultado)
     results = ebay.ebay1(producto, resultsMerLib)

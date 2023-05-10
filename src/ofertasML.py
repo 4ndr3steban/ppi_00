@@ -6,6 +6,11 @@ import os
 import ofertasEbay
 
 def generar_ofertas():
+    """ Webscraping a ofertas de mercadolibre
+    
+    Se hace webscraping para encontrar las etiquetas de las ofertas
+    y guardar sus principales datos como titulo, precio, link, imagen, etc.
+    """
 
     # Establecer la URL de la página que se quiere analizar
     url = 'https://www.mercadolibre.com.co/ofertas?container_id=MCO779366-1#origin=scut&filter_position=1&is_recommended_domain=false'
@@ -36,36 +41,42 @@ def generar_ofertas():
         if img:
             imagen = img.find('img').get('data-src')
         else:
+            # Vacio si no se encuetra la imagen
             imagen = ''
 
         # Encontrar el enlace
         try:
             link = li.find('a', class_='promotion-item__link-container')['href']
         except (KeyError, TypeError):
+            # Vacio si no se encuetra el enlace
             link = ""
 
         # Encontrar el título
         try:
             titulo = li.find('p', class_='promotion-item__title').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el titulo
             titulo = ""
 
         # Intentar encontrar el precio
         try:
             precio = li.find('span', class_='andes-money-amount__fraction').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el precio
             precio = ""
 
         # % de Descuento
         try:
             descuento = li.find('span', class_='andes-money-amount__discount').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el descuento
             descuento = ""
 
         # Envío
         try:
             envio = li.find('span', class_='promotion-item__next-day-text').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el envio
             envio = ""
 
         # Agregar la información a la lista de resultados
@@ -91,7 +102,7 @@ def generar_ofertas():
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='holamundo',
+        password='',
         database='productos'
     )
 
@@ -109,12 +120,14 @@ def generar_ofertas():
 
     try:
         # Crear la tabla en database de mysql
-        cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100))")
+        cursor.execute("""CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), 
+                        Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100))""")
 
     except:
         # Ejecutar la sentencia SQL para eliminar la tabla, en caso de que esté creada en la database y crearla de nuevo
         cursor.execute("DROP TABLE OFERTAS")
-        cursor.execute("CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100))")
+        cursor.execute("""CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), 
+                        Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100))""")
 
     # Recorre la lista de productos y guarda los datos en la tabla
     for prod in prods:
@@ -125,7 +138,8 @@ def generar_ofertas():
         precio= prod['precio']     
         envio = prod['envio']
         descuento = prod['Descuento']
-        consulta = f"INSERT INTO OFERTAS (imagen, Link, Titulo, Precio, Envio, Descuento) VALUES ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}')"
+        consulta = f"""INSERT INTO OFERTAS (imagen, Link, Titulo, Precio, Envio, Descuento) VALUES 
+                    ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}')"""
 
         cursor.execute(consulta)
 
@@ -140,5 +154,3 @@ def generar_ofertas():
 
     # Cierra la conexión
     conn.close()
-
-generar_ofertas()

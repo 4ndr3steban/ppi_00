@@ -21,7 +21,7 @@ mysql = MySQL()
 # variables de configuracion de la base de datos
 app.config["MYSQL_DATABASE_HOST"] = 'localhost'
 app.config["MYSQL_DATABASE_USER"] = 'root'
-app.config["MYSQL_DATABASE_PASSWORD"] = 'holamundo'
+app.config["MYSQL_DATABASE_PASSWORD"] = ''
 app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)
@@ -32,7 +32,7 @@ mail = Mail()
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'pricescaner99@gmail.com'
-app.config['MAIL_PASSWORD'] = 'dqoogqbdnkoatrby'
+app.config['MAIL_PASSWORD'] = 'xyresadogfpndlof'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail.init_app(app)
@@ -101,7 +101,8 @@ def catalogo():
     ofertas = cursor.fetchall()
     conexion.commit()
 
-    return render_template('catalogo_reg.html', ofertas = ofertas) # Se retorna el html de la pagina de catalogo
+    # Se retorna el html de la pagina de catalogo
+    return render_template('catalogo_reg.html', ofertas = ofertas)
 
 # Ruta para la pagina de home
 @app.route('/home', methods = ["GET"])
@@ -302,7 +303,8 @@ def buscar_producto():
         busqueda = request.form['busqueda'] # Se obtiene la busqueda que ingresa el usuario
 
         try:
-            main.guardar(busqueda) # se guarda el producto buscado en una base de datos haciendo web scraping
+            # se guarda el producto buscado en una base de datos haciendo web scraping
+            main.guardar(busqueda)
         except:
             pass
 
@@ -336,7 +338,8 @@ def buscar_producto_reg():
 
         print(busqueda_reg, rango, envio)
         try:
-            main.guardar(busqueda_reg) # se guarda el producto buscado en una base de datos haciendo web scraping
+            # se guarda el producto buscado en una base de datos haciendo web scraping
+            main.guardar(busqueda_reg)
         except:
             pass
 
@@ -348,7 +351,8 @@ def buscar_producto_reg():
 
         # Se tienen en cuenta las variantes de busqueda para extraer la lista de productos de la bd
         if envio == "Si" and rango[0] != "" and rango[1] != "":
-            cursor.execute("SELECT * FROM %s WHERE Precio > %s AND Precio < %s AND EnvGratis != '' ORDER BY Precio " % (aux, rango[0], rango[1]))
+            cursor.execute("SELECT * FROM %s WHERE Precio > %s AND Precio < %s AND EnvGratis != '' ORDER BY Precio " 
+                           % (aux, rango[0], rango[1]))
             productos = cursor.fetchall()
             conexion.commit()
 
@@ -424,13 +428,15 @@ def guardar_email():
 # Ruta para reconocer y usar los archivos css
 @app.route('/static/css/<archivo>', methods = ["Get"])
 def css_link(archivo):
-    return send_from_directory(os.path.join('templates/static/css'), archivo) # Se retorna la direccion a la carpeta de archivos css
+    # Se retorna la direccion a la carpeta de archivos css
+    return send_from_directory(os.path.join('templates/static/css'), archivo)
 
 
 # Ruta para reconocer y usar las imagenes
 @app.route('/static/images/<img>', methods = ["Get"])
 def img_link(img):
-    return send_from_directory(os.path.join('templates/static/images'), img) # Se retorna la direccion a la carpeta de las imagenes
+    # Se retorna la direccion a la carpeta de las imagenes
+    return send_from_directory(os.path.join('templates/static/images'), img)
 
 
 # Control para redireccionar cuando se intenta acceder a ciertas paginas sin logearse

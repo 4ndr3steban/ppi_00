@@ -2,6 +2,12 @@ import requests
 from bs4 import BeautifulSoup
 
 def merLib1(producto, results):
+    """ Webscraping a productos de mercadolibre
+    
+    Se hace webscraping para encontrar las etiquetas de productos
+    y guardar sus principales datos como titulo, precio, link, imagen, etc.
+    """
+
     # Establecer la URL de la página que se quiere analizar
     url = 'https://listado.mercadolibre.com.co/' + producto
 
@@ -33,41 +39,48 @@ def merLib1(producto, results):
     for li in li_list:
 
         # Encontrar imagen (src)
-    
         img = li.find('div', {'class':'slick-slide slick-active'})
         if img: #.find('img').get('src')!="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP": 
             imagen = img.find('img').get('data-src')
         else:
+            # Vacio si no se encuetra la imagen
             imagen = ''
 
         # Encontrar el enlace
         try:
             link = li.find('a', class_='ui-search-link')['href']
         except (KeyError, TypeError):
+            # Vacio si no se encuetra el enlace
             link = ""
 
         # Encontrar el título
         try:
             titulo = li.find('h2', class_='ui-search-item__title shops__item-title').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el titulo
             titulo = ""
 
         # Intentar encontrar el precio
         try:
             precio = li.find('span', class_='price-tag-fraction').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el precio
             precio = ""
 
         # Intentar encontrar la etiqueta MasVendido
         try:
-            MasVendido = li.find('label', class_='ui-search-styled-label ui-search-item__highlight-label__text').text.strip()
+            MasVendido = li.find('label',
+                        class_='ui-search-styled-label ui-search-item__highlight-label__text').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra MasVendido
             MasVendido = ""
 
         # Intentar encontrar la etiqueta EnvGratis
         try:
-            EnvGratis = li.find('p', class_='ui-search-item__shipping ui-search-item__shipping--free shops__item-shipping-free').text.strip()
+            EnvGratis = li.find('p',
+                        class_='ui-search-item__shipping ui-search-item__shipping--free shops__item-shipping-free').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra EnvGratis
             EnvGratis = ""
 
         # Agregar la información a la lista de resultados
@@ -89,6 +102,12 @@ def merLib1(producto, results):
 #### 
 
 def merLib2(producto, results):
+    """ Webscraping a productos de mercadolibre
+    
+    Se hace webscraping para encontrar las etiquetas de productos
+    y guardar sus principales datos como titulo, precio, link, imagen, etc.
+    """
+    
     # Establecer la URL de la página que se quiere analizar
     url = 'https://listado.mercadolibre.com.co/' + producto
 
@@ -122,36 +141,44 @@ def merLib2(producto, results):
         if img: #.find('img').get('src')!="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP": 
             imagen = img.find('img').get('data-src')
         else:
+            # Vacio si no se encuetra la imagen
             imagen = ''
 
         # Encontrar el enlace
         try:
             link = li.find('a', class_='ui-search-link')['href']
         except (KeyError, TypeError):
+            # Vacio si no se encuetra el enlace
             link = ""
 
         # Encontrar el título
         try:
             titulo = li.find('h2', class_='ui-search-item__title shops__item-title').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el titulo
             titulo = ""
 
         # Intentar encontrar el precio
         try:
             precio = li.find('span', class_='price-tag-fraction').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra el precio
             precio = ""
 
         # Intentar encontrar la etiqueta MasVendido
         try:
-            MasVendido = li.find('label', class_='ui-search-styled-label ui-search-item__highlight-label__text').text.strip()
+            MasVendido = li.find('label',
+                         class_='ui-search-styled-label ui-search-item__highlight-label__text').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra MasVendido
             MasVendido = ""
 
         # Intentar encontrar la etiqueta EnvGratis
         try:
-            EnvGratis = li.find('p', class_='ui-search-item__shipping ui-search-item__shipping--free shops__item-shipping-free').text.strip()
+            EnvGratis = li.find('p', 
+                        class_='ui-search-item__shipping ui-search-item__shipping--free shops__item-shipping-free').text.strip()
         except (AttributeError, TypeError):
+            # Vacio si no se encuetra EnvGratis
             EnvGratis = ""
 
         # Agregar la información a la lista de resultados
