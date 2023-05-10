@@ -114,7 +114,7 @@ def ofertasEB():
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='Juan1234',
+        password='holamundo',
         database='productos'
     )
 

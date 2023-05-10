@@ -91,7 +91,7 @@ def generar_ofertas():
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='Juan1234',
+        password='holamundo',
         database='productos'
     )
 

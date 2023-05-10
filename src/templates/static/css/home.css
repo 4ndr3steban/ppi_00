@@ -146,7 +146,7 @@ nav li a:hover {
 /* Para la frase */
 .head h1 {
     margin: 0;
-    padding-top: 3em;
+    padding-top: 4em;
     align-self: center;
     background: #F2F2F2;
     font-family: "Poppins";
@@ -160,7 +160,7 @@ nav li a:hover {
     background: #F2F2F2;
     align-items: center;
     justify-content: center;
-    padding-top: 7em;
+    padding-top: 5em;
     padding-bottom: 0em;
     font-weight: 600;
     text-align: center;
@@ -173,7 +173,7 @@ nav li a:hover {
     background: #F2F2F2;
     /*align-items: center;*/
     display: block;
-    justify-content: center;
+    justify-content: center;    
 }
 
 .busq .botones {
@@ -187,45 +187,52 @@ nav li a:hover {
     outline: none; 
     border: none;
     font-family: "Poppins";
-    letter-spacing: 1px;
-    padding-left: 1.3em;
+    letter-spacing: 2px;
+    padding-left: 1em;
     height: 40px;
     width: 16em;
+    border-radius: 8px;
 }
 
-.busq .botones label {
+.busq .botones .s1 label {
     margin-right: 1rem;
     font-size: 18px;
     margin: 1em;
     margin-bottom: 2em;
-    letter-spacing: 1px;
+    letter-spacing: 3px;
 }
 
 /* Para rango de precio */
 
 .busq .botones .s2{
     width: 100%;
-    height: 15vh;
+    height: 10vh;
     background: #F2F2F2;
     /*align-items: center;*/
     display: block;
     justify-content: center;
-}
-
-.busq .botones .s2 .escoger {
     font-family: "Poppins";
     letter-spacing: 1px;
     font-size: 16px;
-    margin: 1em;
-    margin-bottom: 2em;
 }
 
-.busq .botones label {
+.busq .botones .s2 input {
+    outline: none; 
+    border: none;
+    font-family: "Poppins";
+    letter-spacing: 2px;
+    padding-left: 1em;
+    height: 40px;
+    width: 16em;
+    border-radius: 8px;
+}
+
+.busq .botones .s2 label {
     margin-right: 1rem;
     font-size: 18px;
     margin: 1em;
     margin-bottom: 2em;
-    letter-spacing: 1px;
+    letter-spacing: 3px;
 }
 
 select, input[type="number"] {
@@ -241,14 +248,24 @@ select, input[type="number"] {
     /*align-items: center;*/
     display: block;
     justify-content: center;
+    font-family: "Poppins";
+    letter-spacing: 3px;
+    font-size: 17px;
 }
 
 .busq .botones .choose {
     font-family: "Poppins";
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     font-size: 16px;
     margin: 1em;
     margin-bottom: 2em;
+    outline: none; 
+    border: none;
+    font-family: "Poppins";
+    padding-left: 1em;
+    height: 40px;
+    width: 5em;
+    border-radius: 8px;
 }
 
 .busq button {
@@ -263,4 +280,6 @@ select, input[type="number"] {
     font-weight: 500;
     font-size: 16px;
     margin-bottom: 15em;
+    border-radius: 8px;
 }
+
