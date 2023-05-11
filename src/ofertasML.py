@@ -102,7 +102,7 @@ def generar_ofertas():
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='',
+        password='Juan1234',
         database='productos'
     )
 
@@ -121,13 +121,13 @@ def generar_ofertas():
     try:
         # Crear la tabla en database de mysql
         cursor.execute("""CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), 
-                        Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100))""")
+                        Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100), Pagina VARCHAR(30))""")
 
     except:
         # Ejecutar la sentencia SQL para eliminar la tabla, en caso de que esté creada en la database y crearla de nuevo
         cursor.execute("DROP TABLE OFERTAS")
         cursor.execute("""CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), 
-                        Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100))""")
+                        Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100), Pagina VARCHAR(30))""")
 
     # Recorre la lista de productos y guarda los datos en la tabla
     for prod in prods:
@@ -138,8 +138,10 @@ def generar_ofertas():
         precio= prod['precio']     
         envio = prod['envio']
         descuento = prod['Descuento']
-        consulta = f"""INSERT INTO OFERTAS (imagen, Link, Titulo, Precio, Envio, Descuento) VALUES 
-                    ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}')"""
+        pagina="Mercado Libre"
+
+        consulta = f"""INSERT INTO OFERTAS (imagen, Link, Titulo, Precio, Envio, Descuento, Pagina) VALUES 
+                    ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}', '{pagina}')"""
 
         cursor.execute(consulta)
 

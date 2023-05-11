@@ -10,7 +10,7 @@ def GuardarBD(producto, Archivojson):
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='',
+        password='Juan1234',
         database='productos'
     )
 
@@ -26,7 +26,7 @@ def GuardarBD(producto, Archivojson):
 
     #sql = f"CREATE TABLE `{producto}` (link VARCHAR(300), Titulo VARCHAR(200), Precio VARCHAR(20), EnvGratis VARCHAR(50), MasVendido VARCHAR(50))"
     sql = f"""CREATE TABLE `{producto}` (Imagen VARCHAR(2000), link VARCHAR(2000), Titulo VARCHAR(200),
-            Precio int, EnvGratis VARCHAR(50), MasVendido VARCHAR(50))"""
+            Precio int, EnvGratis VARCHAR(50), MasVendido VARCHAR(50), Pagina VARCHAR(30))"""
     #print(sql)
 
     cursor.execute(sql)
@@ -48,9 +48,14 @@ def GuardarBD(producto, Archivojson):
         env_gratis = prod['EnvGratis']
         mas_vendido = prod['MasVendido']
 
+        if link.find("mercadolibre")!=-1:
+            pagina="Mercado Libre"
+        else:
+            pagina="eBay"
+
         # Consulta para la base de datos
-        consulta = f"""INSERT INTO {producto} (imagen, Link, Titulo, Precio, EnvGratis, MasVendido) VALUES
-                      ('{imagen}', '{link}', '{titulo}', '{precio}', '{env_gratis}', '{mas_vendido}')"""
+        consulta = f"""INSERT INTO {producto} (imagen, Link, Titulo, Precio, EnvGratis, MasVendido, Pagina) VALUES
+                      ('{imagen}', '{link}', '{titulo}', '{precio}', '{env_gratis}', '{mas_vendido}', '{pagina}')"""
         
         #print(consulta)
         cursor.execute(consulta)

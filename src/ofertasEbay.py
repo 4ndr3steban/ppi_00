@@ -87,12 +87,6 @@ def ofertasEB():
             descuento = ""
 
         # Envío
-        '''
-        try:
-            envio = li.find('span', class_='promotion-item__next-day-text').text.strip()
-        except (AttributeError, TypeError):
-            envio = ""
-        '''
         envio = ""
 
         # Agregar la información a la lista de resultados
@@ -118,7 +112,7 @@ def ofertasEB():
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='',
+        password='Juan1234',
         database='productos'
     )
 
@@ -147,7 +141,9 @@ def ofertasEB():
                 
         envio = prod['envio']
         descuento = prod['Descuento']
-        consulta = f"INSERT INTO OFERTAS (imagen, Link, Titulo, Precio, Envio, Descuento) VALUES ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}')"
+        pagina="eBay"
+
+        consulta = f"INSERT INTO OFERTAS (imagen, Link, Titulo, Precio, Envio, Descuento, Pagina) VALUES ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}', '{pagina}')"
 
         cursor.execute(consulta)
 

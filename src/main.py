@@ -9,7 +9,7 @@ def guardar(producto):
     """ Conexion con la base de datos
     
     Se genera una conexion con la base de datos y se guarda
-    una tabla de prosuctos
+    una tabla de productos
     """
 
     # Listas para guardar los productos
@@ -30,5 +30,5 @@ def guardar(producto):
 # Definir el producto a buscar en Mercado Libre Colombia
 
 #busqueda=input('Escribe el producto que quieres comprar: ')
-#busqueda='iPad'
+#busqueda='iphone13'
 #guardar(busqueda)
