@@ -354,6 +354,13 @@ def reset_verified(token):
 # Ruta para buscar un producto y mostrar los resultados 
 @app.route("/buscar-producto", methods = ["GET", "POST"])
 def buscar_producto():
+    """Busca el producto
+    
+    Despues de que el usuario ingresa un producto que desea encontrar, 
+    esta funcion permite que se haga una busqueda por medio del 
+    Web Scapping y finalmente se muestran los resultados.
+    """
+
     if request.method == "POST":
 
         busqueda = request.form['busqueda'] # Se obtiene la busqueda que ingresa el usuario
@@ -385,6 +392,14 @@ def buscar_producto():
 
 @app.route("/buscar-producto-reg", methods = ["GET", "POST"])
 def buscar_producto_reg():
+    """Busca el producto de un usuario registrado
+    
+    Similar a la funcion anterior, sin embargo aqui se esta haciendo
+    una busqueda con base al producto que el usuario desea usando los
+    filtros en la pagina web. Estos incluyen nombre del producto, 
+    rango de precios y si desea envio gratis o no
+    """
+
     if request.method == "POST":
         
         # Se obtienen los datos del producto ingresado
@@ -459,6 +474,13 @@ def buscar_producto_reg():
 
 @app.route("/guardar-email", methods = ["GET", "POST"])
 def guardar_email():
+    """Guardar el correo electronico
+    
+    Permite hacer una conexion a la base de datos donde se verifica
+    si el correo ingresado es existente o es nuevo. En caso de que sea 
+    nuevo, se agrega el correo a la base de datos, si es un correo
+    existente simplemente se genera la conexion a la base de datos
+    """
     if request.method == "POST":
 
         busqueda = request.form['email_no_user'] # Se obtiene la busqueda que ingresa el email
