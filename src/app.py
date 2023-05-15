@@ -78,12 +78,21 @@ login_manager_app = LoginManager(app)
 
 @login_manager_app.user_loader
 def load_user(id):
+    """Encontrar un usuario segun su id
+    
+    busca el id de un usuario en la bd y lo retorna
+    """
+
     return ModelUser.get_by_id(mysql, id)
 
 
 # Ruta para la pagina inicial
 @app.route('/', methods = ["GET", "POST"])
 def inicio():
+    """Muestra la pestaña principal
+
+    """
+
     return render_template('index.html') # Se retorna el html de la pagina de incio
 
 
@@ -91,6 +100,11 @@ def inicio():
 @app.route('/catalogo-reg', methods = ["GET"])
 @login_required
 def catalogo():
+    """Muestra los productos en oferta
+    
+    hace webscraping a las tiendas y extrae los productos en oferta
+    los guarda en la base de datos y luego los muestra en la app
+    """
 
     generar_ofertas()
 
@@ -108,12 +122,20 @@ def catalogo():
 @app.route('/home', methods = ["GET"])
 @login_required
 def home():
+    """Muestra la pestaña home
+
+    """
+
     return render_template('home.html') # Se retorna el html de la pagina de home
 
 
 # Ruta para la pagian de nosotros
 @app.route('/nosotros', methods = ["GET"])
 def nosotros():
+    """Muestra la pestaña de nosotros
+
+    """
+
     return render_template('nosotros.html') # Se retorna el html de la pagina de nosotros
 
 
@@ -121,6 +143,11 @@ def nosotros():
 # Ruta para la pagian de contactanos 
 @app.route('/contactanos', methods = ["GET","POST"])
 def contacto():
+    """Envia email para contactarse con los admins
+    
+    Captura los datos del usuario y el mensaje a enviar
+    luego mediante la funcion send_email envia el mensaje
+    """
 
     if request.method == "POST":
 
@@ -141,6 +168,12 @@ def contacto():
 # Ruta para el registro de usuarios
 @app.route('/signup', methods= ["GET", "POST"])
 def registro():
+    """Registrar un nuevo usuario
+
+    Se ingresan los datos requeridos (nombre, email, password)
+    se revisa que el usuario sea valido (no se encuentre ya registrado)
+    si el usuario es valido se guarda en la base de datos
+    """
 
     if request.method == "POST":
 
@@ -180,6 +213,12 @@ def registro():
 # Ruta para el inicio de sesión de usuarios
 @app.route('/login', methods= ["GET", "POST"])
 def login():
+    """Inicio de sesion de un usuario
+    
+    el usuario ingresa su nombre y contraseña
+    se verifican con los registrados en la base de datos
+    si son correctos se le da acceso a la aplicacion
+    """
 
     if request.method == 'POST':
 
@@ -210,6 +249,11 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
+    """Cierre de sesion de un usuario
+    
+    mediante la funcion logout_user el usuario
+    finaliza su sesion
+    """
     logout_user()
     return redirect('/')
 
@@ -217,6 +261,11 @@ def logout():
 # Ruta para enviar el correo de cambio de contraseña
 @app.route("/restablecer-contrasena", methods= ["GET", "POST"])
 def reset_request():
+    """Enviar correo para cambiar el password de un usuario
+    
+    el usuario ingresa su email, si este concuerda con el registrado
+    se envia un a su email un mensaje para cambiar su password
+    """
 
     if request.method == "POST":
 
@@ -258,6 +307,12 @@ def reset_request():
 # Ruta segura para cambiar la contraseña
 @app.route('/restablecer-contrasena-verificado/<token>', methods=['GET', 'POST'])
 def reset_verified(token):
+    """Cambiar contraseña de un usuario
+    
+    Se verifica que el usuario ingresara al link enviado a su email
+    luego el usuario ingresa su nuevo password y este es cambiado
+    en la base de datos
+    """
 
     try:
         # Se verifica el token de seguridad enviado al email del usuario
