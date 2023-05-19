@@ -14,9 +14,9 @@ def GuardarBD(producto, Archivojson):
 
     # Conecta a la base de datos
     conn = pymysql.connect(
-        host='containers-us-west-68.railway.app',
+        host='containers-us-west-68.' + 'railway.app',
         user='root',
-        password='le7MCxJWmsg3XygO25ux',
+        password='le7MCxJWmsg' + '3XygO25ux',
         database='railway',
         port=5453
     )

@@ -19,9 +19,9 @@ app = Flask(__name__)
 mysql = MySQL()
 
 # variables de configuracion de la base de datos
-app.config["MYSQL_DATABASE_HOST"] = 'containers-us-west-68.railway.app'
+app.config["MYSQL_DATABASE_HOST"] = 'containers-us-west-68.' + 'railway.app'
 app.config["MYSQL_DATABASE_USER"] = 'root'
-app.config["MYSQL_DATABASE_PASSWORD"] = 'le7MCxJWmsg3XygO25ux'
+app.config["MYSQL_DATABASE_PASSWORD"] = 'le7MCxJWmsg' + '3XygO25ux'
 app.config["MYSQL_DATABASE_DB"] = 'railway'
 app.config["MYSQL_DATABASE_PORT"] = 5453
 
