@@ -21,7 +21,7 @@ mysql = MySQL()
 # variables de configuracion de la base de datos
 app.config["MYSQL_DATABASE_HOST"] = 'localhost'
 app.config["MYSQL_DATABASE_USER"] = 'root'
-app.config["MYSQL_DATABASE_PASSWORD"] = ''
+app.config["MYSQL_DATABASE_PASSWORD"] = 'holamundo'
 app.config["MYSQL_DATABASE_DB"] = 'productos'
 
 mysql.init_app(app)
@@ -45,7 +45,9 @@ logger = logging.getLogger(__name__)
 def _send_async_email(app, msg):
     """Envia el mail con el metodo send
     
-    captura el error de envio en caso de ocurrir
+    Captura el error de envio en caso de ocurrir. La funcion recibe como 
+    parametros la instancia de la aplicacion y el mensaje. Usa un try 
+    except para mandar enviar el correo de manera asincronica. 
     """
 
     with app.app_context():
@@ -59,8 +61,10 @@ def _send_async_email(app, msg):
 def send_email(subject, sender, recipients, text_body, cc=None, bcc=None, html_body=None):
     """Crea la instancia del mensaje y lo envia
     
-    llama a la funcion _send_async_email y la ejecuta por
-    otro hilo de procesamiento (se envia de forma asincronuca)
+    Llama a la funcion _send_async_email y la ejecuta por
+    otro hilo de procesamiento (se envia de forma asincronica). Esta funcion, recibe los diferentes
+    parametros necesarios para enviar el correo de manera mas eficiente y posteriormente
+    envia el mensaje.
     """
 
     msg = Message(subject, sender=sender, recipients=recipients, cc=cc, bcc=bcc)
@@ -80,7 +84,7 @@ login_manager_app = LoginManager(app)
 def load_user(id):
     """Encontrar un usuario segun su id
     
-    busca el id de un usuario en la bd y lo retorna
+    Busca y toma como parametro el id de un usuario en la base de datos y lo retorna
     """
 
     return ModelUser.get_by_id(mysql, id)
@@ -91,9 +95,11 @@ def load_user(id):
 def inicio():
     """Muestra la pestaña principal
 
+    La funcion no toma ningun parametro, pero se encarga de mostrar por pantalla
+    la pagina inicial de la aplicacion.
     """
-
-    return render_template('index.html') # Se retorna el html de la pagina de incio
+    # Se retorna el html de la pagina de incio
+    return render_template('index.html') 
 
 
 # Ruta para la pagina del catalogo
@@ -102,8 +108,9 @@ def inicio():
 def catalogo():
     """Muestra los productos en oferta
     
-    hace webscraping a las tiendas y extrae los productos en oferta
-    los guarda en la base de datos y luego los muestra en la app
+    La funcion no toma ningun parametro, pero se encarga de hacer webscraping 
+    a las tiendas y extrae los productos que estan en oferta. Posteriormente
+    los guarda en la base de datos y luego los muestra en la aplicacion.
     """
 
     generar_ofertas()
@@ -124,9 +131,12 @@ def catalogo():
 def home():
     """Muestra la pestaña home
 
+    La funcion no toma ningun parametro, pero se encarga de mostrar por pantalla
+    la pagina inicial de la aplicacion de un usuario registrado.
     """
 
-    return render_template('home.html') # Se retorna el html de la pagina de home
+    # Se retorna el html de la pagina de home
+    return render_template('home.html')
 
 
 # Ruta para la pagian de nosotros
@@ -134,9 +144,11 @@ def home():
 def nosotros():
     """Muestra la pestaña de nosotros
 
+    La funcion no toma ningun parametro, pero se encarga de mostrar por pantalla
+    la pagina de "Nosotros".
     """
-
-    return render_template('nosotros.html') # Se retorna el html de la pagina de nosotros
+    # Se retorna el html de la pagina de nosotros
+    return render_template('nosotros.html')
 
 
 
@@ -145,8 +157,8 @@ def nosotros():
 def contacto():
     """Envia email para contactarse con los admins
     
-    Captura los datos del usuario y el mensaje a enviar
-    luego mediante la funcion send_email envia el mensaje
+    La funcion no recibe parametros. Captura los datos del usuario y el 
+    mensaje a enviar, luego mediante la funcion send_email envia el mensaje. 
     """
 
     if request.method == "POST":
@@ -162,7 +174,8 @@ def contacto():
                    recipients = ["pricescaner@yahoo.com"],
                    text_body = Mensaje)
 
-    return render_template("contactanos.html") # Se retorna el html de la pagina de contactanos
+    # Se retorna el html de la pagina de contactanos
+    return render_template("contactanos.html") 
 
 
 # Ruta para el registro de usuarios
@@ -199,7 +212,8 @@ def registro():
 
             flash("Usuario registrado, por favor inicie sesión", "info")
 
-            return redirect('/login') # Se envia a logearse
+            # Se envia a logearse
+            return redirect('/login') 
         else:
 
             # Se muesta un mensaje si el usuario es existente
@@ -251,8 +265,7 @@ def login():
 def logout():
     """Cierre de sesion de un usuario
     
-    mediante la funcion logout_user el usuario
-    finaliza su sesion
+    Mediante la funcion logout_user el usuario finaliza su sesion
     """
     logout_user()
     return redirect('/')
@@ -263,7 +276,7 @@ def logout():
 def reset_request():
     """Enviar correo para cambiar el password de un usuario
     
-    el usuario ingresa su email, si este concuerda con el registrado
+    Para la funcion, el usuario ingresa su email si este concuerda con el registrado
     se envia un a su email un mensaje para cambiar su password
     """
 
@@ -311,7 +324,9 @@ def reset_verified(token):
     
     Se verifica que el usuario ingresara al link enviado a su email
     luego el usuario ingresa su nuevo password y este es cambiado
-    en la base de datos
+    en la base de datos. 
+    La funcion usa un try except para verificar el token de seguridad que se le 
+    envia al correo. 
     """
 
     try:

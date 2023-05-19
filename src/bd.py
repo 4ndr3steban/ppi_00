@@ -16,7 +16,7 @@ def GuardarBD(producto, Archivojson):
     conn = pymysql.connect(
         host='localhost',
         user='root',
-        password='',
+        password='holamundo',
         database='productos'
     )
 
