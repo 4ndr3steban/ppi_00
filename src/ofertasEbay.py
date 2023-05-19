@@ -65,7 +65,7 @@ def ofertasEB():
             precio = div.find('span', class_='first').text.strip()
             pre=precio.replace("COP $","")
             pre=pre.replace(" ","")
-            pre=pre.replace(",","")
+            #pre=pre.replace(",","")
             pre=pre.replace("$","")
             pre=pre.replace("\u00a0","")
             if pre.find("a")!=-1:
@@ -76,7 +76,7 @@ def ofertasEB():
 
 
 
-            precio=int(pre)
+            #precio=int(pre)
         except (AttributeError, TypeError):
             # Vacio si no se encuetra el precio
             precio = ""
