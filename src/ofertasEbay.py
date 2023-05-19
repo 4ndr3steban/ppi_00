@@ -65,7 +65,7 @@ def ofertasEB():
             precio = div.find('span', class_='first').text.strip()
             pre=precio.replace("COP $","")
             pre=pre.replace(" ","")
-            #pre=pre.replace(".","")
+            pre=pre.replace(",","")
             pre=pre.replace("$","")
             pre=pre.replace("\u00a0","")
             if pre.find("a")!=-1:
@@ -73,6 +73,8 @@ def ofertasEB():
 
             if pre.find(".")!=-1:
                 pre=pre[0:pre.find(".")]
+
+
 
             precio=int(pre)
         except (AttributeError, TypeError):
@@ -149,7 +151,10 @@ def ofertasEB():
         cursor.execute(consulta)
 
     # Eliminar el archivo .json
-    os.remove("data_ofertaseb.json")
+    try:
+        os.remove("data_ofertaseb.json")
+    except:
+        pass
 
     # Guarda los cambios en la base de datos y cierra la conexión
     conn.commit()

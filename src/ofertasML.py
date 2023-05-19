@@ -147,8 +147,11 @@ def generar_ofertas():
         cursor.execute(consulta)
 
     # Eliminar el archivo .json
-    os.remove("data_ofertas.json")
-
+    try:
+        os.remove("data_ofertas.json")
+    except:
+        pass
+    
     # Guarda los cambios en la base de datos
     conn.commit()
 
