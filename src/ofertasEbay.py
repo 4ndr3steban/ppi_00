@@ -110,10 +110,11 @@ def ofertasEB():
 
     # Conecta a la base de datos
     conn = pymysql.connect(
-        host='localhost',
+        host='containers-us-west-68.railway.app',
         user='root',
-        password='holamundo',
-        database='productos'
+        password='le7MCxJWmsg3XygO25ux',
+        database='railway',
+        port=5453
     )
 
     # Abre el archivo JSON
@@ -143,7 +144,7 @@ def ofertasEB():
         descuento = prod['Descuento']
         pagina="eBay"
 
-        consulta = f"INSERT INTO OFERTAS (imagen, Link, Titulo, Precio, Envio, Descuento, Pagina) VALUES ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}', '{pagina}')"
+        consulta = f"INSERT INTO ofertas (imagen, Link, Titulo, Precio, Envio, Descuento, Pagina) VALUES ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}', '{pagina}')"
 
         cursor.execute(consulta)
 

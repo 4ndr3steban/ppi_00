@@ -19,10 +19,11 @@ app = Flask(__name__)
 mysql = MySQL()
 
 # variables de configuracion de la base de datos
-app.config["MYSQL_DATABASE_HOST"] = 'localhost'
+app.config["MYSQL_DATABASE_HOST"] = 'containers-us-west-68.railway.app'
 app.config["MYSQL_DATABASE_USER"] = 'root'
-app.config["MYSQL_DATABASE_PASSWORD"] = 'holamundo'
-app.config["MYSQL_DATABASE_DB"] = 'productos'
+app.config["MYSQL_DATABASE_PASSWORD"] = 'le7MCxJWmsg3XygO25ux'
+app.config["MYSQL_DATABASE_DB"] = 'railway'
+app.config["MYSQL_DATABASE_PORT"] = 5453
 
 mysql.init_app(app)
 
@@ -200,13 +201,13 @@ def registro():
         cursor = conexion.cursor()
 
         # Variable para controlar si el usuario ya existía
-        cursor.execute("SELECT email FROM usuarios WHERE email = %s", (email))
+        cursor.execute("SELECT email FROM usuario WHERE email = %s", (email))
         aux = cursor.fetchone()
         print(aux)
         if aux == None:
 
             # Si el usuario no existe se guarda en la base de datos
-            cursor.execute("INSERT INTO usuarios (nombre, email, password) VALUES (%s,%s,%s)", 
+            cursor.execute("INSERT INTO usuario (nombre, email, password) VALUES (%s,%s,%s)", 
                            (name, email, generate_password_hash(password),))
             conexion.commit()
 

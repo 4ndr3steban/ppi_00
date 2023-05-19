@@ -14,7 +14,7 @@ class ModelUser():
             cursor = conexion.cursor()
 
             # Se extrae la información de un usuario
-            sql = f"""SELECT id, nombre, email, password FROM usuarios 
+            sql = f"""SELECT id, nombre, email, password FROM usuario 
                     WHERE email = '{user.email}'"""
             cursor.execute(sql)
             row = cursor.fetchone()
@@ -39,7 +39,7 @@ class ModelUser():
             cursor = conexion.cursor()
 
             # Se selecciona un usuario
-            sql = f"SELECT id, email, nombre FROM usuarios WHERE id = {id}"
+            sql = f"SELECT id, email, nombre FROM usuario WHERE id = {id}"
             cursor.execute(sql)
             row = cursor.fetchone()
 

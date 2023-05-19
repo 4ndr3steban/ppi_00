@@ -35,6 +35,6 @@ class User(UserMixin):
         conexion = mysql.connect()
         cursor = conexion.cursor()
 
-        cursor.execute("SELECT nombre FROM usuarios WHERE nombre = %s", (username))
+        cursor.execute("SELECT nombre FROM usuario WHERE nombre = %s", (username))
         aux = cursor.fetchone()
         return aux

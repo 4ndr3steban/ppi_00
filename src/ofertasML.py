@@ -100,10 +100,11 @@ def generar_ofertas():
 
     # Conecta a la base de datos
     conn = pymysql.connect(
-        host='localhost',
+        host='containers-us-west-68.railway.app',
         user='root',
-        password='holamundo',
-        database='productos'
+        password='le7MCxJWmsg3XygO25ux',
+        database='railway',
+        port=5453
     )
 
     # Abre el archivo JSON
@@ -120,13 +121,13 @@ def generar_ofertas():
 
     try:
         # Crear la tabla en database de mysql
-        cursor.execute("""CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), 
+        cursor.execute("""CREATE TABLE ofertas (Imagen VARCHAR(2000), link VARCHAR(2000), 
                         Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100), Pagina VARCHAR(30))""")
 
     except:
         # Ejecutar la sentencia SQL para eliminar la tabla, en caso de que esté creada en la database y crearla de nuevo
-        cursor.execute("DROP TABLE OFERTAS")
-        cursor.execute("""CREATE TABLE OFERTAS (Imagen VARCHAR(2000), link VARCHAR(2000), 
+        cursor.execute("DROP TABLE ofertas")
+        cursor.execute("""CREATE TABLE ofertas (Imagen VARCHAR(2000), link VARCHAR(2000), 
                         Titulo VARCHAR(200), Precio VARCHAR(100), Envio VARCHAR(100), Descuento VARCHAR(100), Pagina VARCHAR(30))""")
 
     # Recorre la lista de productos y guarda los datos en la tabla
@@ -140,7 +141,7 @@ def generar_ofertas():
         descuento = prod['Descuento']
         pagina="Mercado Libre"
 
-        consulta = f"""INSERT INTO OFERTAS (imagen, Link, Titulo, Precio, Envio, Descuento, Pagina) VALUES 
+        consulta = f"""INSERT INTO ofertas (imagen, Link, Titulo, Precio, Envio, Descuento, Pagina) VALUES 
                     ('{imagen}', '{link}', '{titulo}', '{precio}', '{envio}', '{descuento}', '{pagina}')"""
 
         cursor.execute(consulta)
