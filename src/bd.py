@@ -4,9 +4,10 @@ import pymysql
 def GuardarBD(producto, Archivojson):
     """Guarda el producto en la base de datos
     
-    La funcion permite que se guarden los productos del archivo
-    JSON a la base de datos por medio de una tabla, guardando toda 
-    su informacion.
+    La funcion toma dos parametros: el producto y el archivo JSON.
+    Se conecta con la base de datos y crea una tabla con las especificaciones
+    Luego en un ciclo for se permite que se guarden los productos del archivo
+    JSON a la base de datos guardando toda su informacion.
     """
 
     #verificar que producto no tenga espacios
@@ -43,7 +44,7 @@ def GuardarBD(producto, Archivojson):
         imagen=prod['imagen']
         link = prod['link']
         titulo = prod['titulo']
-        #precio = prod['precio']
+
         try:
             # Se formatea el precio
             precio = (prod['precio']).replace(".","")

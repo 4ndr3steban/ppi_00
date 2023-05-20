@@ -5,7 +5,7 @@ class ModelUser():
 
     @classmethod
     def login(self, mysql, user):
-        """ Se verifica si el usuario si existe en la base de datos"""
+        """ Se verifica si el usuario si existe en la base de datos """
 
         try:
 

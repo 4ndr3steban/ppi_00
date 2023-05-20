@@ -7,8 +7,9 @@ import os
 def ofertasEB():
     """ Webscraping a ofertas de Ebay
     
-    Se hace webscraping para encontrar las etiquetas de las ofertas
-    y guardar sus principales datos como titulo, precio, link, imagen, etc.
+    La funcion se encarga de hacerle webscrapping a las ofertas de los productos
+    que se encuentran en la tienda de ebay. No tiene parametros, y finalmente 
+    agrega los productos en una tabla dentro de la base de datos.
     """
     # Establecer la URL de la página que se quiere analizar
     url = 'https://www.ebay.com/globaldeals'
@@ -37,7 +38,7 @@ def ofertasEB():
     trash_price=["'","COP $", " "]
     for div in div_list:
         # Encontrar imagen (src)
-        img = div.find('div', {'class': 'slashui-image-cntr'}) #promotion-item__img-container
+        img = div.find('div', {'class': 'slashui-image-cntr'})
         if img:
             imagen = img.find('img').get('src')
         else:
@@ -52,7 +53,6 @@ def ofertasEB():
             # Vacio si no se encuetra el enlace
             link = ''
 
-
         # Encontrar el título
         try:
             titulo = div.find('span', class_='ebayui-ellipsis-2').text.strip()
@@ -65,7 +65,6 @@ def ofertasEB():
             precio = div.find('span', class_='first').text.strip()
             pre=precio.replace("COP $","")
             pre=pre.replace(" ","")
-            #pre=pre.replace(",","")
             pre=pre.replace("$","")
             pre=pre.replace("\u00a0","")
             if pre.find("a")!=-1:
@@ -74,9 +73,6 @@ def ofertasEB():
             if pre.find(".")!=-1:
                 pre=pre[0:pre.find(".")]
 
-
-
-            #precio=int(pre)
         except (AttributeError, TypeError):
             # Vacio si no se encuetra el precio
             precio = ""

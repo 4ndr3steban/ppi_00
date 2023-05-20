@@ -6,10 +6,11 @@ import os
 import ofertasEbay
 
 def generar_ofertas():
-    """ Webscraping a ofertas de mercadolibre
+    """ Webscraping a ofertas de mercado libre
     
-    Se hace webscraping para encontrar las etiquetas de las ofertas
-    y guardar sus principales datos como titulo, precio, link, imagen, etc.
+    La funcion se encarga de hacerle webscrapping a las ofertas de los productos
+    que se encuentran en la tienda de ebay. No tiene parametros, y finalmente 
+    agrega los productos en una tabla dentro de la base de datos.
     """
 
     # Establecer la URL de la página que se quiere analizar
@@ -116,9 +117,6 @@ def generar_ofertas():
     cursor=conn.cursor()
 
     #crear la tabla
-
-    #sql = f"CREATE TABLE `{producto}` (link VARCHAR(300), Titulo VARCHAR(200), Precio VARCHAR(20), EnvGratis VARCHAR(50), MasVendido VARCHAR(50))"
-
     try:
         # Crear la tabla en database de mysql
         cursor.execute("""CREATE TABLE ofertas (Imagen VARCHAR(2000), link VARCHAR(2000), 

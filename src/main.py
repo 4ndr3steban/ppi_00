@@ -8,8 +8,9 @@ import ebay
 def guardar(producto):
     """ Conexion con la base de datos
     
-    Se genera una conexion con la base de datos y se guarda
-    una tabla de productos
+    La funcion se encarga de guardar un producto en la base de datos. 
+    Aqui se genera una conexion con la base de datos y se guarda una tabla de
+    productos
     """
 
     # Listas para guardar los productos
@@ -26,9 +27,3 @@ def guardar(producto):
     # Ejecutar funcion que crea la tabla e inserta los datos del producto (contenidos en el .json) en ella
     bd.GuardarBD(producto, outfile.name)
 
-
-# Definir el producto a buscar en Mercado Libre Colombia
-
-#busqueda=input('Escribe el producto que quieres comprar: ')
-#busqueda='iphone13'
-#guardar(busqueda)

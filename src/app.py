@@ -374,12 +374,15 @@ def buscar_producto():
     
     Despues de que el usuario ingresa un producto que desea encontrar, 
     esta funcion permite que se haga una busqueda por medio del 
-    Web Scapping y finalmente se muestran los resultados.
+    Web Scapping, no se toman parametros pero se usa un try y except para 
+    guardar el producto, se extraen los productos guardados y finalmente se 
+    muestran los resultados.
     """
 
     if request.method == "POST":
 
-        busqueda = request.form['busqueda'] # Se obtiene la busqueda que ingresa el usuario
+        # Se obtiene la busqueda que ingresa el usuario
+        busqueda = request.form['busqueda'] 
 
         try:
             # se guarda el producto buscado en una base de datos haciendo web scraping
@@ -387,7 +390,8 @@ def buscar_producto():
         except:
             pass
 
-        aux = busqueda.replace(" ", "") # Esta variable guarda el nombre de la tabla
+        # Esta variable guarda el nombre de la tabla
+        aux = busqueda.replace(" ", "")
         
         # Se genera una conexion a la base de datos y se extraen los productos recien guardados
         conexion = mysql.connect()
@@ -416,7 +420,12 @@ def buscar_producto_reg():
     Similar a la funcion anterior, sin embargo aqui se esta haciendo
     una busqueda con base al producto que el usuario desea usando los
     filtros en la pagina web. Estos incluyen nombre del producto, 
-    rango de precios y si desea envio gratis o no
+    rango de precios y si desea envio gratis o no.
+
+    Primeramente se obtienen los datos ingresados por el usuario en los filtros
+    y luego se hace un try para guardar correctamente el producto. Posteriormente se
+    hace un if para ordenar los productos en base a los filtros y en orden de
+    precio.
     """
 
     if request.method == "POST":
@@ -433,7 +442,8 @@ def buscar_producto_reg():
         except:
             pass
 
-        aux = busqueda_reg.replace(" ", "") # Esta variable guarda el nombre de la tabla
+        # Esta variable guarda el nombre de la tabla
+        aux = busqueda_reg.replace(" ", "") 
         
         # Se genera una conexion a la base de datos y se extraen los productos recien guardados
         conexion = mysql.connect()
@@ -481,7 +491,6 @@ def buscar_producto_reg():
             productos = cursor.fetchall()
             conexion.commit()
         
-
         # Eliminar del directorio de trabajo el archivo auxiliar creado para la base de datos
         os.remove("data_"+busqueda_reg+".json") 
         
@@ -495,14 +504,15 @@ def buscar_producto_reg():
 def guardar_email():
     """Guardar el correo electronico
     
-    Permite hacer una conexion a la base de datos donde se verifica
-    si el correo ingresado es existente o es nuevo. En caso de que sea 
-    nuevo, se agrega el correo a la base de datos, si es un correo
-    existente simplemente se genera la conexion a la base de datos
+    La funcion no toma parametros y permite hacer una conexion a la base de datos 
+    donde se verifica si el correo ingresado es existente o es nuevo. 
+    En caso de que sea nuevo, se agrega el correo a la base de datos, si es un correo
+    existente simplemente se genera la conexion a la base de datos.  
     """
     if request.method == "POST":
 
-        busqueda = request.form['email_no_user'] # Se obtiene la busqueda que ingresa el email
+        # Se obtiene la busqueda que ingresa el email
+        busqueda = request.form['email_no_user']
 
         # Se genera la conexión a la base de datos
         conexion = mysql.connect()
@@ -525,6 +535,7 @@ def guardar_email():
 # Ruta para reconocer y usar los archivos css
 @app.route('/static/css/<archivo>', methods = ["Get"])
 def css_link(archivo):
+
     # Se retorna la direccion a la carpeta de archivos css
     return send_from_directory(os.path.join('templates/static/css'), archivo)
 
@@ -532,6 +543,7 @@ def css_link(archivo):
 # Ruta para reconocer y usar las imagenes
 @app.route('/static/images/<img>', methods = ["Get"])
 def img_link(img):
+
     # Se retorna la direccion a la carpeta de las imagenes
     return send_from_directory(os.path.join('templates/static/images'), img)
 

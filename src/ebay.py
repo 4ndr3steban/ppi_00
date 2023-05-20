@@ -4,12 +4,14 @@ from bs4 import BeautifulSoup
 def ebay1(producto, results):
     """ Webscraping a la pagina www.ebay.com
     
-    Se hace webscraping para encontrar las etiquetas de productos
+    La funcion le hace webscraping a los productos de ebay. Toma como parametros
+    el producto y al final retornas el resultado. La funcion encuentra las etiquetas de productos
     y guardar sus principales datos como titulo, precio, link, imagen, etc.
     """
 
     # Establecer la URL de la página que se quiere analizar
     url= 'https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313&_nkw='+ producto+'&_sacat=0'
+
     # Establecer los encabezados para la solicitud
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
@@ -21,7 +23,6 @@ def ebay1(producto, results):
 
     print(url)
     print(response)
-    #print(response.content)
 
     # Analizar el contenido HTML de la página con BeautifulSoup
     soup = BeautifulSoup(response.content, 'html.parser')
@@ -30,14 +31,12 @@ def ebay1(producto, results):
     li_list = soup.find_all('li', class_='s-item s-item__pl-on-bottom')
 
     # Recorrer cada elemento li y extraer la información relevante
-    #results = []
     n=100
     for li in li_list:
 
         # Encontrar imagen (src)
-    
         img = li.find('div', {'class':'s-item__image-wrapper image-treatment'})
-        if img: #.find('img').get('src')!="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP": 
+        if img: 
             imagen = img.find('img').get('src')
         else:
             imagen = ''
@@ -61,7 +60,6 @@ def ebay1(producto, results):
             precio = li.find('span', class_='s-item__price').text.strip()
             pre=precio.replace("COP $","")
             pre=pre.replace(" ","")
-            #pre=pre.replace(".","")
             pre=pre.replace("$","")
             pre=pre.replace("\u00a0","")
             if pre.find("a")!=-1:
@@ -71,7 +69,6 @@ def ebay1(producto, results):
                 pre=pre[0:pre.find(".")]
 
             precio=int(pre)
-            #precio=pre
         except (AttributeError, TypeError):
             # Vacio si no encuentra el precio
             precio = ""

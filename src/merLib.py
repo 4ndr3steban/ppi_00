@@ -2,9 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 
 def merLib1(producto, results):
-    """ Webscraping a productos de mercadolibre
-    
-    Se hace webscraping para encontrar las etiquetas de productos
+    """ Webscraping a productos de mercadolibre - 1
+
+    La funcion le hace webscraping a los productos de mercado libre. Toma como parametros
+    el producto y al final retornas el resultado. La funcion encuentra las etiquetas de productos
     y guardar sus principales datos como titulo, precio, link, imagen, etc.
     """
 
@@ -22,7 +23,6 @@ def merLib1(producto, results):
 
     print(url)
     print(response)
-    #print(response.content)
 
     # Analizar el contenido HTML de la página con BeautifulSoup
     soup = BeautifulSoup(response.content, 'html.parser')
@@ -30,17 +30,13 @@ def merLib1(producto, results):
     # Encontrar todos los elementos li con class="ui-search-layout__item shops__layout-item"
     li_list = soup.find_all('li', class_='ui-search-layout__item shops__layout-item')
 
-    #2
-    #li_list = soup.find_all('li', class_='ui-search-layout__item')
-
     # Recorrer cada elemento li y extraer la información relevante
-    #results = []
     n=0
     for li in li_list:
 
         # Encontrar imagen (src)
         img = li.find('div', {'class':'slick-slide slick-active'})
-        if img: #.find('img').get('src')!="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP": 
+        if img:
             imagen = img.find('img').get('data-src')
         else:
             # Vacio si no se encuetra la imagen
@@ -99,12 +95,11 @@ def merLib1(producto, results):
     return results
 
 
-#### 
-
 def merLib2(producto, results):
-    """ Webscraping a productos de mercadolibre
-    
-    Se hace webscraping para encontrar las etiquetas de productos
+    """ Webscraping a productos de mercadolibre - 1
+
+    La funcion le hace webscraping a los productos de mercado libre. Toma como parametros
+    el producto y al final retornas el resultado. La funcion encuentra las etiquetas de productos
     y guardar sus principales datos como titulo, precio, link, imagen, etc.
     """
     
@@ -121,7 +116,6 @@ def merLib2(producto, results):
     response = requests.get(url, headers=headers)
 
     print(url)
-    #print(response)
     print(response.content)
 
     # Analizar el contenido HTML de la página con BeautifulSoup
@@ -131,14 +125,13 @@ def merLib2(producto, results):
     li_list = soup.find_all('li', class_='ui-search-layout__item')
 
     # Recorrer cada elemento li y extraer la información relevante
-    #results = []
     n=0
     for li in li_list:
 
         # Encontrar imagen (src)
     
         img = li.find('div', {'class':'slick-slide slick-active'})
-        if img: #.find('img').get('src')!="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP": 
+        if img:
             imagen = img.find('img').get('data-src')
         else:
             # Vacio si no se encuetra la imagen
