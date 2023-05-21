@@ -557,8 +557,8 @@ def status_401(error):
 def status_404(error):
     return "<h1>Página no encontrada</h1>", 404
 
+app.register_error_handler(401, status_401)
+app.register_error_handler(404, status_404)
 
 if __name__ == "__main__":
-    app.register_error_handler(401, status_401)
-    app.register_error_handler(404, status_404)
     app.run(debug=True)
