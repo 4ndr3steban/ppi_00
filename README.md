@@ -28,4 +28,4 @@ El aplicativo es una herramienta que permitirá buscar y comparar productos de d
 
 ### Enlace a la Pagina
 ***
-http://andr3steban.pythonanywhere.com/
+https://price-scaner.onrender.com
